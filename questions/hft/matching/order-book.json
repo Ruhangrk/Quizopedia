@@ -1,0 +1,55 @@
+{
+  "id": "hft-matching-order-book",
+  "title": "Order Book",
+  "path": "questions/hft/matching/order-book.json",
+  "tags": ["hft", "matching", "order-book"],
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "prompt": "In a standard limit order book, which price level is the **best bid**?",
+      "options": [
+        { "id": "highest_buy", "text": "Highest resting buy price" },
+        { "id": "lowest_buy", "text": "Lowest resting buy price" },
+        { "id": "highest_sell", "text": "Highest resting sell price" },
+        { "id": "mid", "text": "Midpoint of the day open" }
+      ],
+      "correctOptionIds": ["highest_buy"],
+      "explanation": "Best bid is the highest price at which someone is willing to buy."
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "prompt": "The **spread** is best described as:",
+      "options": [
+        { "id": "bid_ask", "text": "Best ask minus best bid" },
+        { "id": "volume", "text": "Total traded volume" },
+        { "id": "vwap", "text": "Volume-weighted average price only" },
+        { "id": "lot", "text": "Minimum lot size" }
+      ],
+      "correctOptionIds": ["bid_ask"],
+      "explanation": "Quoted spread is typically best ask − best bid."
+    },
+    {
+      "id": "q3",
+      "type": "mcq_multi",
+      "prompt": "Which statements about FIFO matching (at a price level) are typically true?\n\n- Select all that apply",
+      "options": [
+        { "id": "time_priority", "text": "Earlier orders at the same price generally match first" },
+        { "id": "size_always", "text": "Largest order always matches before smaller ones at same price" },
+        { "id": "price_first", "text": "Better prices still have priority over worse prices" },
+        { "id": "random", "text": "Match order is uniformly random among all prices" }
+      ],
+      "correctOptionIds": ["time_priority", "price_first"],
+      "explanation": "Price-time priority: better price first, then earlier time at that price."
+    },
+    {
+      "id": "q4",
+      "type": "fib",
+      "prompt": "A buy order that executes immediately against resting sell liquidity is typically called a ____ order (one word).",
+      "answers": ["market"],
+      "caseSensitive": false,
+      "explanation": "A market order is intended for immediate execution against available liquidity."
+    }
+  ]
+}

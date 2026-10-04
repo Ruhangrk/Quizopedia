@@ -1,0 +1,55 @@
+{
+  "id": "hft-latency-basics",
+  "title": "Latency Basics",
+  "path": "questions/hft/latency/basics.json",
+  "tags": ["hft", "latency"],
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "prompt": "Which is typically lowest latency for colocated trading?",
+      "options": [
+        { "id": "rest", "text": "REST over HTTPS" },
+        { "id": "udp", "text": "UDP multicast market data" },
+        { "id": "email", "text": "Email alerts" },
+        { "id": "batch", "text": "Daily batch files" }
+      ],
+      "correctOptionIds": ["udp"],
+      "explanation": "UDP multicast is common for market data fanout with lower overhead than request/response HTTPS."
+    },
+    {
+      "id": "q2",
+      "type": "mcq_multi",
+      "prompt": "Which of the following **reduce** market-data path latency? (select all)\n\n- Think about placement and networking\n- Ignore options that add work on the hot path",
+      "options": [
+        { "id": "colo", "text": "Colocation near the matching engine" },
+        { "id": "json_logs", "text": "Verbose JSON logging on the hot path" },
+        { "id": "kernel_bypass", "text": "Kernel-bypass networking" },
+        { "id": "gc_pauses", "text": "Frequent stop-the-world GC on the feed handler" }
+      ],
+      "correctOptionIds": ["colo", "kernel_bypass"],
+      "explanation": "Colocation and kernel bypass help. Hot-path logging and GC pauses hurt latency."
+    },
+    {
+      "id": "q3",
+      "type": "fib",
+      "prompt": "RTT stands for round-trip ____.",
+      "answers": ["time"],
+      "caseSensitive": false,
+      "explanation": "Round-trip time."
+    },
+    {
+      "id": "q4",
+      "type": "mcq",
+      "prompt": "You see p99 latency jump on the feed handler:\n\n```text\np50 = 12us\np99 = 800us\n```\n\nWhich first check is **most** useful?",
+      "options": [
+        { "id": "logs", "text": "Audit / disable hot-path logging and allocations" },
+        { "id": "ignore", "text": "Ignore p99; only median matters in HFT" },
+        { "id": "email", "text": "Switch the feed to email alerts" },
+        { "id": "daily", "text": "Move processing to a daily batch job" }
+      ],
+      "correctOptionIds": ["logs"],
+      "explanation": "p99 spikes often come from avoidable hot-path work such as logging and allocations."
+    }
+  ]
+}
