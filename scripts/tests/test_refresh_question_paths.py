@@ -513,6 +513,123 @@ class RefreshPathsTest(unittest.TestCase):
         bad.write_text("{not json", encoding="utf-8")
         self.assertEqual(run(self.repo), 1)
 
+    def test_crossed_path_fields_do_not_swap_history(self) -> None:
+        """If two banks point at each other's live paths, fix fields but keep history."""
+        write_bank(
+            self.repo / "questions" / "a" / "x.json",
+            {"id": "a", "title": "A", "path": "questions/b/x.json", "questions": []},
+        )
+        write_bank(
+            self.repo / "questions" / "b" / "x.json",
+            {"id": "b", "title": "B", "path": "questions/a/x.json", "questions": []},
+        )
+        history_path = self.repo / "history" / "attempts.json"
+        history_path.write_text(
+            json.dumps(
+                [
+                    {
+                        "id": "att",
+                        "sources": ["questions/a/x.json", "questions/b/x.json"],
+                        "items": [
+                            {"sourcePath": "questions/a/x.json"},
+                            {"sourcePath": "questions/b/x.json"},
+                        ],
+                        "breakdown": {
+                            "bySource": [
+                                {"path": "questions/a/x.json"},
+                                {"path": "questions/b/x.json"},
+                            ]
+                        },
+                    }
+                ],
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+
+        code = run(self.repo)
+        self.assertEqual(code, 0)
+        self.assertEqual(
+            read_json(self.repo / "questions" / "a" / "x.json")["path"],
+            "questions/a/x.json",
+        )
+        self.assertEqual(
+            read_json(self.repo / "questions" / "b" / "x.json")["path"],
+            "questions/b/x.json",
+        )
+        # Old bug swapped these to [b, a]. Live paths must stay put.
+        hist = read_json(history_path)
+        self.assertEqual(hist[0]["sources"], ["questions/a/x.json", "questions/b/x.json"])
+        self.assertEqual(hist[0]["items"][0]["sourcePath"], "questions/a/x.json")
+        self.assertEqual(hist[0]["items"][1]["sourcePath"], "questions/b/x.json")
+        self.assertEqual(hist[0]["breakdown"]["bySource"][0]["path"], "questions/a/x.json")
+
+        remap, modified, _, errors, _ = refresh_question_banks(self.repo)
+        self.assertEqual(errors, 0)
+        self.assertEqual(remap, {})
+        # Second pass: banks already correct, nothing to modify.
+        self.assertEqual(modified, [])
+
+    def test_stale_path_that_collides_with_live_bank_skips_history_only(self) -> None:
+        """Moved-looking field that still names another live bank: fix JSON, skip history."""
+        write_bank(
+            self.repo / "questions" / "keep.json",
+            {"id": "keep", "title": "Keep", "path": "questions/keep.json", "questions": []},
+        )
+        write_bank(
+            self.repo / "questions" / "moved.json",
+            {"id": "moved", "title": "Moved", "path": "questions/keep.json", "questions": []},
+        )
+        history_path = self.repo / "history" / "attempts.json"
+        history_path.write_text(
+            json.dumps(
+                [
+                    {
+                        "id": "att",
+                        "sources": ["questions/keep.json", "questions/moved.json"],
+                        "items": [
+                            {"sourcePath": "questions/keep.json"},
+                            {"sourcePath": "questions/moved.json"},
+                        ],
+                        "breakdown": {
+                            "bySource": [
+                                {"path": "questions/keep.json"},
+                                {"path": "questions/moved.json"},
+                            ]
+                        },
+                    }
+                ]
+            ),
+            encoding="utf-8",
+        )
+
+        code = run(self.repo)
+        self.assertEqual(code, 0)
+        self.assertEqual(read_json(self.repo / "questions" / "moved.json")["path"], "questions/moved.json")
+        self.assertEqual(read_json(self.repo / "questions" / "keep.json")["path"], "questions/keep.json")
+        hist = read_json(history_path)
+        # Must not rewrite keep → moved
+        self.assertEqual(hist[0]["sources"], ["questions/keep.json", "questions/moved.json"])
+
+    def test_conflicting_remap_same_prev_different_targets(self) -> None:
+        write_bank(
+            self.repo / "questions" / "a.json",
+            {"id": "a", "title": "A", "path": "questions/old/shared.json", "questions": []},
+        )
+        write_bank(
+            self.repo / "questions" / "b.json",
+            {"id": "b", "title": "B", "path": "questions/old/shared.json", "questions": []},
+        )
+        remap, modified, _, errors, msgs = refresh_question_banks(self.repo)
+        self.assertEqual(errors, 1)
+        self.assertTrue(any("conflicting remap" in m for m in msgs))
+        # First writer wins the remap entry; second conflicts
+        self.assertEqual(remap, {"questions/old/shared.json": "questions/a.json"})
+        self.assertEqual(len(modified), 2)
+        self.assertEqual(read_json(self.repo / "questions" / "a.json")["path"], "questions/a.json")
+        self.assertEqual(read_json(self.repo / "questions" / "b.json")["path"], "questions/b.json")
+
 
 if __name__ == "__main__":
     unittest.main()

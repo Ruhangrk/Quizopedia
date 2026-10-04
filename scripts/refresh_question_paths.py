@@ -33,11 +33,22 @@ def dump_json(path: Path, data: Any) -> None:
     path.write_text(text, encoding="utf-8")
 
 
+def _is_bank_object(data: Any) -> bool:
+    return isinstance(data, dict) and (
+        "questions" in data or "path" in data or "id" in data
+    )
+
+
 def refresh_question_banks(
     root: Path,
     questions_dir: Path | None = None,
 ) -> tuple[dict[str, str], list[str], int, int, list[str]]:
-    """Return (remap prev->new, modified_lines, unchanged, errors_count, error_msgs)."""
+    """Return (remap prev->new, modified_lines, unchanged, errors_count, error_msgs).
+
+    History remaps only include prev→new when `prev` is not itself a current
+    on-disk bank path. Otherwise a crossed/wrong path field would rewrite
+    history rows that already correctly point at another live bank.
+    """
     qdir = questions_dir or (root / "questions")
     remap: dict[str, str] = {}
     modified_lines: list[str] = []
@@ -49,29 +60,29 @@ def refresh_question_banks(
         return remap, modified_lines, unchanged, len(errors), errors
 
     files = sorted(qdir.rglob("*.json"))
-    # Skip helper/spec non-bank files if any appear later; only treat objects with questions array ideally
+    # Pass 1: load + classify; collect every current expected bank path.
+    pending: list[tuple[Path, dict[str, Any], str, str | None]] = []
+    current_paths: set[str] = set()
+
     for file_path in files:
-        if file_path.name.upper().endswith(".MD") or file_path.suffix != ".json":
-            continue
-        # Ignore accidental non-bank json under questions if clearly not a bank
         try:
             data = load_json(file_path)
         except Exception as exc:  # noqa: BLE001 - report and continue
             errors.append(f"ERROR  {expected_path_for(file_path, root)}: invalid JSON ({exc})")
             continue
 
-        if not isinstance(data, dict):
-            # e.g. not a bank — skip silently
-            unchanged += 1
-            continue
-        if "questions" not in data and "path" not in data and "id" not in data:
+        if not _is_bank_object(data):
             unchanged += 1
             continue
 
         expected = expected_path_for(file_path, root)
+        current_paths.add(expected)
         prev = data.get("path")
         prev_s = prev if isinstance(prev, str) else None
+        pending.append((file_path, data, expected, prev_s))
 
+    # Pass 2: rewrite wrong/missing path fields; build safe history remaps only.
+    for file_path, data, expected, prev_s in pending:
         if prev_s == expected:
             unchanged += 1
             continue
@@ -85,10 +96,30 @@ def refresh_question_banks(
 
         display_prev = prev_s if prev_s is not None else "<missing>"
         if prev_s:
-            remap[prev_s] = expected
-        modified_lines.append(
-            f"MODIFIED  {expected}\n  prev: {display_prev}\n  new:  {expected}"
-        )
+            if prev_s in current_paths:
+                modified_lines.append(
+                    f"MODIFIED  {expected}\n"
+                    f"  prev: {display_prev}\n"
+                    f"  new:  {expected}\n"
+                    f"  history-remap: skipped (prev still a live bank path)"
+                )
+            elif prev_s in remap and remap[prev_s] != expected:
+                errors.append(
+                    f"ERROR  conflicting remap for {prev_s!r}: "
+                    f"{remap[prev_s]!r} vs {expected!r}"
+                )
+                modified_lines.append(
+                    f"MODIFIED  {expected}\n  prev: {display_prev}\n  new:  {expected}"
+                )
+            else:
+                remap[prev_s] = expected
+                modified_lines.append(
+                    f"MODIFIED  {expected}\n  prev: {display_prev}\n  new:  {expected}"
+                )
+        else:
+            modified_lines.append(
+                f"MODIFIED  {expected}\n  prev: {display_prev}\n  new:  {expected}"
+            )
 
     return remap, modified_lines, unchanged, len(errors), errors
 
