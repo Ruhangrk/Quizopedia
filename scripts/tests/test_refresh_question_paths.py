@@ -230,20 +230,288 @@ class RefreshPathsTest(unittest.TestCase):
         self.assertIn("file not found", msg)
 
     def test_real_sample_banks_have_correct_paths(self) -> None:
-        for rel in (
-            "questions/hft/latency/basics.json",
-            "questions/hft/matching/order-book.json",
-        ):
+        samples = sorted(
+            p.relative_to(ROOT).as_posix()
+            for p in (ROOT / "questions").rglob("*.json")
+        )
+        self.assertGreaterEqual(len(samples), 10)
+        for rel in samples:
             data = read_json(ROOT / rel)
-            self.assertEqual(data["path"], rel)
+            self.assertEqual(data["path"], rel, msg=rel)
 
         remap, modified, unchanged, errors, msgs = refresh_question_banks(ROOT)
         self.assertEqual(errors, 0, msgs)
-        # Committed samples must remain unchanged by the script
-        joined = "\n".join(modified)
-        self.assertNotIn("questions/hft/latency/basics.json", joined)
-        self.assertNotIn("questions/hft/matching/order-book.json", joined)
-        self.assertGreaterEqual(unchanged, 2)
+        self.assertEqual(remap, {})
+        self.assertEqual(modified, [])
+        self.assertEqual(unchanged, len(samples))
+
+    def test_missing_questions_dir_is_error(self) -> None:
+        # remove questions/
+        (self.repo / "questions").rmdir()
+        remap, modified, unchanged, errors, msgs = refresh_question_banks(self.repo)
+        self.assertEqual(errors, 1)
+        self.assertTrue(any("questions directory not found" in m for m in msgs))
+        self.assertEqual(remap, {})
+        self.assertEqual(modified, [])
+
+    def test_empty_questions_dir(self) -> None:
+        remap, modified, unchanged, errors, _ = refresh_question_banks(self.repo)
+        self.assertEqual(errors, 0)
+        self.assertEqual(unchanged, 0)
+        self.assertEqual(modified, [])
+        self.assertEqual(remap, {})
+
+    def test_non_string_path_is_replaced_without_remap(self) -> None:
+        path = self.repo / "questions" / "weird.json"
+        write_bank(
+            path,
+            {"id": "w", "title": "W", "path": 123, "questions": []},
+        )
+        remap, modified, unchanged, errors, _ = refresh_question_banks(self.repo)
+        self.assertEqual(errors, 0)
+        self.assertEqual(unchanged, 0)
+        self.assertEqual(len(modified), 1)
+        self.assertEqual(remap, {})  # no string prev → no history remap key
+        self.assertEqual(read_json(path)["path"], "questions/weird.json")
+        self.assertIn("prev: <missing>", modified[0])
+
+    def test_null_path_treated_as_missing(self) -> None:
+        path = self.repo / "questions" / "nullpath.json"
+        write_bank(
+            path,
+            {"id": "n", "title": "N", "path": None, "questions": []},
+        )
+        remap, modified, _, errors, _ = refresh_question_banks(self.repo)
+        self.assertEqual(errors, 0)
+        self.assertEqual(remap, {})
+        self.assertEqual(read_json(path)["path"], "questions/nullpath.json")
+        self.assertEqual(len(modified), 1)
+
+    def test_preserves_other_bank_fields(self) -> None:
+        path = self.repo / "questions" / "keep.json"
+        write_bank(
+            path,
+            {
+                "id": "keep",
+                "title": "Keep Me",
+                "path": "questions/old/keep.json",
+                "tags": ["dsa", "arrays"],
+                "questions": [
+                    {
+                        "id": "q1",
+                        "type": "fib",
+                        "prompt": "hi",
+                        "answers": ["yo"],
+                        "explanation": "because",
+                    }
+                ],
+                "extraMeta": {"author": "ruhang"},
+            },
+        )
+        refresh_question_banks(self.repo)
+        data = read_json(path)
+        self.assertEqual(data["path"], "questions/keep.json")
+        self.assertEqual(data["id"], "keep")
+        self.assertEqual(data["title"], "Keep Me")
+        self.assertEqual(data["tags"], ["dsa", "arrays"])
+        self.assertEqual(data["extraMeta"], {"author": "ruhang"})
+        self.assertEqual(data["questions"][0]["explanation"], "because")
+
+    def test_json_array_root_skipped_as_non_bank(self) -> None:
+        path = self.repo / "questions" / "list.json"
+        path.write_text(json.dumps([1, 2, 3]) + "\n", encoding="utf-8")
+        remap, modified, unchanged, errors, _ = refresh_question_banks(self.repo)
+        self.assertEqual(errors, 0)
+        self.assertEqual(modified, [])
+        self.assertEqual(unchanged, 1)
+        self.assertEqual(remap, {})
+        self.assertEqual(read_json(path), [1, 2, 3])
+
+    def test_unrelated_object_json_skipped(self) -> None:
+        path = self.repo / "questions" / "config.json"
+        path.write_text(json.dumps({"foo": 1}) + "\n", encoding="utf-8")
+        remap, modified, unchanged, errors, _ = refresh_question_banks(self.repo)
+        self.assertEqual(errors, 0)
+        self.assertEqual(modified, [])
+        self.assertEqual(unchanged, 1)
+        self.assertEqual(read_json(path), {"foo": 1})
+
+    def test_deep_nested_path_and_dsa_style(self) -> None:
+        path = self.repo / "questions" / "DSA" / "arrays" / "basics.json"
+        write_bank(
+            path,
+            {
+                "id": "dsa-arrays-basics",
+                "title": "Arrays",
+                "path": "questions/old/arrays.json",
+                "questions": [],
+            },
+        )
+        remap, modified, _, errors, _ = refresh_question_banks(self.repo)
+        self.assertEqual(errors, 0)
+        self.assertEqual(
+            remap,
+            {"questions/old/arrays.json": "questions/DSA/arrays/basics.json"},
+        )
+        self.assertEqual(read_json(path)["path"], "questions/DSA/arrays/basics.json")
+
+    def test_multiple_banks_remapped_and_history_multi(self) -> None:
+        write_bank(
+            self.repo / "questions" / "a" / "one.json",
+            {"id": "one", "title": "One", "path": "questions/old/one.json", "questions": []},
+        )
+        write_bank(
+            self.repo / "questions" / "b" / "two.json",
+            {"id": "two", "title": "Two", "path": "questions/old/two.json", "questions": []},
+        )
+        history_path = self.repo / "history" / "attempts.json"
+        history_path.write_text(
+            json.dumps(
+                [
+                    {
+                        "id": "att",
+                        "sources": [
+                            "questions/old/one.json",
+                            "questions/old/two.json",
+                            "questions/untouched.json",
+                        ],
+                        "items": [
+                            {"sourcePath": "questions/old/one.json"},
+                            {"sourcePath": "questions/old/two.json"},
+                            {"sourcePath": "questions/untouched.json"},
+                        ],
+                        "breakdown": {
+                            "bySource": [
+                                {"path": "questions/old/one.json"},
+                                {"path": "questions/old/two.json"},
+                                {"path": "questions/untouched.json"},
+                            ]
+                        },
+                    }
+                ]
+            ),
+            encoding="utf-8",
+        )
+        code = run(self.repo)
+        self.assertEqual(code, 0)
+        hist = read_json(history_path)
+        self.assertEqual(
+            hist[0]["sources"],
+            [
+                "questions/a/one.json",
+                "questions/b/two.json",
+                "questions/untouched.json",
+            ],
+        )
+        self.assertEqual(hist[0]["items"][0]["sourcePath"], "questions/a/one.json")
+        self.assertEqual(hist[0]["items"][1]["sourcePath"], "questions/b/two.json")
+        self.assertEqual(hist[0]["breakdown"]["bySource"][1]["path"], "questions/b/two.json")
+
+    def test_idempotent_second_run(self) -> None:
+        path = self.repo / "questions" / "x.json"
+        write_bank(
+            path,
+            {"id": "x", "title": "X", "path": "questions/old/x.json", "questions": []},
+        )
+        history_path = self.repo / "history" / "attempts.json"
+        history_path.write_text(
+            json.dumps(
+                [
+                    {
+                        "id": "att",
+                        "sources": ["questions/old/x.json"],
+                        "items": [{"sourcePath": "questions/old/x.json"}],
+                        "breakdown": {"bySource": [{"path": "questions/old/x.json"}]},
+                    }
+                ]
+            ),
+            encoding="utf-8",
+        )
+        self.assertEqual(run(self.repo), 0)
+        mtime1 = path.stat().st_mtime_ns
+        hist1 = history_path.read_text(encoding="utf-8")
+        self.assertEqual(run(self.repo), 0)
+        self.assertEqual(path.stat().st_mtime_ns, mtime1)
+        self.assertEqual(history_path.read_text(encoding="utf-8"), hist1)
+
+    def test_history_not_array_reports_error_without_crash(self) -> None:
+        write_bank(
+            self.repo / "questions" / "x.json",
+            {"id": "x", "title": "X", "path": "questions/old/x.json", "questions": []},
+        )
+        history_path = self.repo / "history" / "attempts.json"
+        history_path.write_text(json.dumps({"not": "array"}), encoding="utf-8")
+        msg, updated = refresh_history_file(
+            history_path,
+            {"questions/old/x.json": "questions/x.json"},
+        )
+        self.assertFalse(updated)
+        self.assertIn("HISTORY: error", msg)
+        # original history left intact
+        self.assertEqual(read_json(history_path), {"not": "array"})
+
+    def test_history_invalid_json_reports_error(self) -> None:
+        history_path = self.repo / "history" / "attempts.json"
+        history_path.write_text("{bad", encoding="utf-8")
+        msg, updated = refresh_history_file(history_path, {"a": "b"})
+        self.assertFalse(updated)
+        self.assertIn("error reading file", msg)
+
+    def test_history_malformed_attempt_fields_do_not_crash(self) -> None:
+        history = [
+            {
+                "id": "odd",
+                "sources": "not-a-list",
+                "items": [{"sourcePath": 99}, "skip-me", {"sourcePath": "questions/old/a.json"}],
+                "breakdown": {"bySource": "nope"},
+            },
+            "not-an-object",
+            {
+                "id": "ok",
+                "sources": ["questions/old/a.json"],
+                "items": [],
+                "breakdown": {},
+            },
+        ]
+        new_data, replacements, touched = remap_history_paths(
+            history,
+            {"questions/old/a.json": "questions/a.json"},
+        )
+        self.assertEqual(replacements, 2)  # one in items, one in sources of ok
+        self.assertEqual(touched, 2)
+        self.assertEqual(new_data[0]["sources"], "not-a-list")
+        self.assertEqual(new_data[0]["items"][2]["sourcePath"], "questions/a.json")
+        self.assertEqual(new_data[1], "not-an-object")
+        self.assertEqual(new_data[2]["sources"], ["questions/a.json"])
+
+    def test_unicode_content_preserved(self) -> None:
+        path = self.repo / "questions" / "unicode.json"
+        write_bank(
+            path,
+            {
+                "id": "u",
+                "title": "延迟 / Latency",
+                "path": "questions/old/u.json",
+                "questions": [
+                    {
+                        "id": "q1",
+                        "type": "fib",
+                        "prompt": "μs means micro____",
+                        "answers": ["seconds", "秒"],
+                    }
+                ],
+            },
+        )
+        refresh_question_banks(self.repo)
+        data = read_json(path)
+        self.assertEqual(data["title"], "延迟 / Latency")
+        self.assertEqual(data["questions"][0]["answers"][1], "秒")
+        self.assertIn("μs", data["questions"][0]["prompt"])
+
+    def test_run_returns_nonzero_on_bank_errors(self) -> None:
+        bad = self.repo / "questions" / "bad.json"
+        bad.write_text("{not json", encoding="utf-8")
+        self.assertEqual(run(self.repo), 1)
 
 
 if __name__ == "__main__":

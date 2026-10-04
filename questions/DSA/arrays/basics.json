@@ -1,0 +1,154 @@
+{
+  "id": "dsa-arrays-basics",
+  "title": "Arrays Basics",
+  "path": "questions/DSA/arrays/basics.json",
+  "tags": [
+    "dsa",
+    "arrays"
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "prompt": "Array indexing is typically **O(____)** time.",
+      "options": [
+        {
+          "id": "1",
+          "text": "O(1)"
+        },
+        {
+          "id": "n",
+          "text": "O(n)"
+        },
+        {
+          "id": "logn",
+          "text": "O(log n)"
+        },
+        {
+          "id": "n2",
+          "text": "O(n\u00b2)"
+        }
+      ],
+      "correctOptionIds": [
+        "1"
+      ],
+      "explanation": "Random access by index is constant time."
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "prompt": "Inserting at the **beginning** of a dynamic array (shifting elements) is usually:",
+      "options": [
+        {
+          "id": "n",
+          "text": "O(n)"
+        },
+        {
+          "id": "1",
+          "text": "O(1)"
+        },
+        {
+          "id": "logn",
+          "text": "O(log n)"
+        },
+        {
+          "id": "nlogn",
+          "text": "O(n log n)"
+        }
+      ],
+      "correctOptionIds": [
+        "n"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "mcq_multi",
+      "prompt": "Which are true about arrays?\n\n- Select all that apply",
+      "options": [
+        {
+          "id": "contig",
+          "text": "Elements are stored in contiguous memory (typical)"
+        },
+        {
+          "id": "rand",
+          "text": "Support fast random access"
+        },
+        {
+          "id": "mid_cheap",
+          "text": "Inserting in the middle is always O(1)"
+        },
+        {
+          "id": "cache",
+          "text": "Good spatial locality / cache friendliness"
+        }
+      ],
+      "correctOptionIds": [
+        "contig",
+        "rand",
+        "cache"
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "fib",
+      "prompt": "The number of elements in an array is commonly called its ____.",
+      "answers": [
+        "length",
+        "size"
+      ],
+      "caseSensitive": false
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "prompt": "Two-pointer technique on a sorted array is often used to:",
+      "options": [
+        {
+          "id": "pair",
+          "text": "Find a pair with a target sum in O(n)"
+        },
+        {
+          "id": "sort",
+          "text": "Sort in O(n\u00b2) only"
+        },
+        {
+          "id": "hash",
+          "text": "Build a hash table"
+        },
+        {
+          "id": "dfs",
+          "text": "Run DFS"
+        }
+      ],
+      "correctOptionIds": [
+        "pair"
+      ]
+    },
+    {
+      "id": "q6",
+      "type": "mcq",
+      "prompt": "Sliding window problems usually apply when:",
+      "options": [
+        {
+          "id": "contig",
+          "text": "You care about contiguous subarrays/substrings"
+        },
+        {
+          "id": "tree",
+          "text": "The input is only a binary tree"
+        },
+        {
+          "id": "graph",
+          "text": "You need shortest path in a weighted graph"
+        },
+        {
+          "id": "heap",
+          "text": "You only need heapify"
+        }
+      ],
+      "correctOptionIds": [
+        "contig"
+      ]
+    }
+  ]
+}

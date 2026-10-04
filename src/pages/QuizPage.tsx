@@ -75,7 +75,7 @@ export function QuizPage({ runtime, onAnswer, onGoto, onFinish, onAbort }: Props
         </div>
         <div style={{ textAlign: "right" }}>
           <div className={styles.muted}>Elapsed</div>
-          <strong style={{ fontFamily: "var(--font-display)", fontSize: "1.6rem" }}>
+          <strong style={{ fontSize: "1.45rem", fontWeight: 700 }}>
             {formatDuration(elapsed)}
           </strong>
         </div>
@@ -94,7 +94,7 @@ export function QuizPage({ runtime, onAnswer, onGoto, onFinish, onAbort }: Props
           {q.question.type === "mcq_multi" && (
             <p className={styles.hint}>Select all that apply.</p>
           )}
-          <div className={styles.options}>
+          <div className={styles.optionsScroll}>
             {(q.displayOptions ?? q.question.options).map((opt) => {
               const selected =
                 q.question.type === "mcq"

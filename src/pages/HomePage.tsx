@@ -11,6 +11,7 @@ type Props = {
   onMode: (mode: QuizMode) => void;
   onToggleFile: (path: string) => void;
   onToggleMany: (paths: string[], select: boolean) => void;
+  onClearSelection: () => void;
   onStart: () => void;
   onOpenHistory: () => void;
   onConnectHistory: () => void;
@@ -24,6 +25,7 @@ export function HomePage({
   onMode,
   onToggleFile,
   onToggleMany,
+  onClearSelection,
   onStart,
   onOpenHistory,
   onConnectHistory,
@@ -46,12 +48,14 @@ export function HomePage({
         </div>
       </div>
 
-      <TreePicker
-        nodes={tree}
-        selected={selected}
-        onToggleFile={onToggleFile}
-        onToggleMany={onToggleMany}
-      />
+      <div className={styles.treeScroll}>
+        <TreePicker
+          nodes={tree}
+          selected={selected}
+          onToggleFile={onToggleFile}
+          onToggleMany={onToggleMany}
+        />
+      </div>
 
       <div className={styles.toolbar}>
         <div className={styles.modeGroup} role="group" aria-label="Question order">
@@ -76,6 +80,14 @@ export function HomePage({
           </button>
           <button type="button" className="btn" onClick={onOpenHistory}>
             History
+          </button>
+          <button
+            type="button"
+            className="btn"
+            disabled={selected.size === 0}
+            onClick={onClearSelection}
+          >
+            Clear
           </button>
           <button
             type="button"

@@ -1,0 +1,129 @@
+{
+  "id": "hft-risk-kill-switches",
+  "title": "Kill Switches",
+  "path": "questions/hft/risk/kill-switches.json",
+  "tags": [
+    "hft",
+    "risk"
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "prompt": "A kill switch in trading systems is primarily for:",
+      "options": [
+        {
+          "id": "halt",
+          "text": "Quickly stopping trading / cancelling exposure"
+        },
+        {
+          "id": "pnl",
+          "text": "Maximizing overnight PnL"
+        },
+        {
+          "id": "mkt_data",
+          "text": "Compressing market data"
+        },
+        {
+          "id": "ui",
+          "text": "Changing UI themes"
+        }
+      ],
+      "correctOptionIds": [
+        "halt"
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "mcq_multi",
+      "prompt": "Good kill-switch design usually includes:\n\n- Select all that apply",
+      "options": [
+        {
+          "id": "cancel",
+          "text": "Cancel open orders"
+        },
+        {
+          "id": "block",
+          "text": "Block new order entry"
+        },
+        {
+          "id": "audit",
+          "text": "Audit / alert that it fired"
+        },
+        {
+          "id": "slow",
+          "text": "Silently slow orders by 1%"
+        }
+      ],
+      "correctOptionIds": [
+        "cancel",
+        "block",
+        "audit"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "fib",
+      "prompt": "Pre-trade risk checks that reject orders before they leave the firm are called ____ controls (one common word).",
+      "answers": [
+        "pretrade",
+        "pre-trade",
+        "pre trade"
+      ],
+      "caseSensitive": false,
+      "explanation": "Pre-trade risk controls."
+    },
+    {
+      "id": "q4",
+      "type": "mcq",
+      "prompt": "A max order-rate limit protects against:",
+      "options": [
+        {
+          "id": "runaway",
+          "text": "Runaway / buggy order bursts"
+        },
+        {
+          "id": "spread",
+          "text": "Natural spread widening"
+        },
+        {
+          "id": "open",
+          "text": "Market open auctions only"
+        },
+        {
+          "id": "halt",
+          "text": "Exchange-wide halts only"
+        }
+      ],
+      "correctOptionIds": [
+        "runaway"
+      ]
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "prompt": "Fat-finger protection typically limits:",
+      "options": [
+        {
+          "id": "size_price",
+          "text": "Unexpectedly large size or aggressive price"
+        },
+        {
+          "id": "fonts",
+          "text": "UI font size"
+        },
+        {
+          "id": "logs",
+          "text": "Log retention days"
+        },
+        {
+          "id": "ntp",
+          "text": "NTP stratum"
+        }
+      ],
+      "correctOptionIds": [
+        "size_price"
+      ]
+    }
+  ]
+}

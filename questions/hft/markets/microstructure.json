@@ -1,0 +1,155 @@
+{
+  "id": "hft-markets-microstructure",
+  "title": "Market Microstructure",
+  "path": "questions/hft/markets/microstructure.json",
+  "tags": [
+    "hft",
+    "markets",
+    "microstructure"
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "prompt": "Adverse selection for a market maker means:",
+      "options": [
+        {
+          "id": "toxic",
+          "text": "Filled when the other side has better information"
+        },
+        {
+          "id": "rebate",
+          "text": "Always earning the rebate"
+        },
+        {
+          "id": "mid",
+          "text": "Always trading at mid"
+        },
+        {
+          "id": "auction",
+          "text": "Only trading in auctions"
+        }
+      ],
+      "correctOptionIds": [
+        "toxic"
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "prompt": "Quoted depth at the touch is:",
+      "options": [
+        {
+          "id": "size",
+          "text": "Displayed size at best bid/ask"
+        },
+        {
+          "id": "vwap",
+          "text": "Day VWAP"
+        },
+        {
+          "id": "oi",
+          "text": "Open interest"
+        },
+        {
+          "id": "beta",
+          "text": "Stock beta"
+        }
+      ],
+      "correctOptionIds": [
+        "size"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "mcq_multi",
+      "prompt": "Which can widen spreads?\n\n- Select all that apply",
+      "options": [
+        {
+          "id": "vol",
+          "text": "Higher volatility"
+        },
+        {
+          "id": "news",
+          "text": "Major news uncertainty"
+        },
+        {
+          "id": "comp",
+          "text": "More competing market makers"
+        },
+        {
+          "id": "thin",
+          "text": "Thinner liquidity"
+        }
+      ],
+      "correctOptionIds": [
+        "vol",
+        "news",
+        "thin"
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "fib",
+      "prompt": "Trading that captures the bid-ask spread by posting passively is often called ____ making.",
+      "answers": [
+        "market",
+        "market-making",
+        "market making"
+      ],
+      "caseSensitive": false
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "prompt": "A midpoint peg order is typically priced relative to:",
+      "options": [
+        {
+          "id": "nbbo_mid",
+          "text": "The NBBO / BBO midpoint"
+        },
+        {
+          "id": "yesterday",
+          "text": "Yesterday's close only"
+        },
+        {
+          "id": "ipo",
+          "text": "IPO price"
+        },
+        {
+          "id": "hwm",
+          "text": "High-water mark"
+        }
+      ],
+      "correctOptionIds": [
+        "nbbo_mid"
+      ]
+    },
+    {
+      "id": "q6",
+      "type": "mcq",
+      "prompt": "Queue position matters most when:",
+      "options": [
+        {
+          "id": "fifo",
+          "text": "Many orders rest at the same price (FIFO)"
+        },
+        {
+          "id": "empty",
+          "text": "The book is empty"
+        },
+        {
+          "id": "halt",
+          "text": "Market is halted"
+        },
+        {
+          "id": "closed",
+          "text": "Market is closed"
+        }
+      ],
+      "correctOptionIds": [
+        "fifo"
+      ]
+    }
+  ]
+}

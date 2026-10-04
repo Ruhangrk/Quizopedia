@@ -1,0 +1,153 @@
+{
+  "id": "dsa-trees-binary-trees",
+  "title": "Binary Trees",
+  "path": "questions/DSA/trees/binary-trees.json",
+  "tags": [
+    "dsa",
+    "trees"
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "prompt": "In a binary tree, each node has at most ____ children.",
+      "options": [
+        {
+          "id": "2",
+          "text": "2"
+        },
+        {
+          "id": "1",
+          "text": "1"
+        },
+        {
+          "id": "3",
+          "text": "3"
+        },
+        {
+          "id": "n",
+          "text": "n"
+        }
+      ],
+      "correctOptionIds": [
+        "2"
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "prompt": "Inorder traversal of a **BST** visits keys in:",
+      "options": [
+        {
+          "id": "sorted",
+          "text": "Sorted order"
+        },
+        {
+          "id": "rev",
+          "text": "Reverse random order"
+        },
+        {
+          "id": "level",
+          "text": "Only level order"
+        },
+        {
+          "id": "post",
+          "text": "Only postorder"
+        }
+      ],
+      "correctOptionIds": [
+        "sorted"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "mcq_multi",
+      "prompt": "Which are tree traversals?\n\n- Select all that apply",
+      "options": [
+        {
+          "id": "pre",
+          "text": "Preorder"
+        },
+        {
+          "id": "in",
+          "text": "Inorder"
+        },
+        {
+          "id": "post",
+          "text": "Postorder"
+        },
+        {
+          "id": "dijkstra",
+          "text": "Dijkstra"
+        }
+      ],
+      "correctOptionIds": [
+        "pre",
+        "in",
+        "post"
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "fib",
+      "prompt": "BFS on a tree is often implemented with a ____.",
+      "answers": [
+        "queue",
+        "Queue"
+      ],
+      "caseSensitive": false
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "prompt": "Height of a single-node tree is often defined as:",
+      "options": [
+        {
+          "id": "0or1",
+          "text": "0 or 1 depending on convention"
+        },
+        {
+          "id": "n",
+          "text": "Always n"
+        },
+        {
+          "id": "logn",
+          "text": "Always log n"
+        },
+        {
+          "id": "neg",
+          "text": "Always -1"
+        }
+      ],
+      "correctOptionIds": [
+        "0or1"
+      ]
+    },
+    {
+      "id": "q6",
+      "type": "mcq",
+      "prompt": "A complete binary tree of height h has at most how many nodes? (0-index height or levels \u2014 pick standard 2^(h+1)-1 for height h with root height 0)",
+      "options": [
+        {
+          "id": "form",
+          "text": "2^(h+1) - 1"
+        },
+        {
+          "id": "h2",
+          "text": "h\u00b2"
+        },
+        {
+          "id": "2h",
+          "text": "2h"
+        },
+        {
+          "id": "h",
+          "text": "h"
+        }
+      ],
+      "correctOptionIds": [
+        "form"
+      ]
+    }
+  ]
+}

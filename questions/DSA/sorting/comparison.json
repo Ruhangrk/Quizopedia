@@ -1,0 +1,152 @@
+{
+  "id": "dsa-sorting-comparison",
+  "title": "Comparison Sorting",
+  "path": "questions/DSA/sorting/comparison.json",
+  "tags": [
+    "dsa",
+    "sorting"
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "prompt": "The comparison-based sorting lower bound in the algebraic decision tree model is:",
+      "options": [
+        {
+          "id": "nlogn",
+          "text": "\u03a9(n log n)"
+        },
+        {
+          "id": "n",
+          "text": "\u03a9(n)"
+        },
+        {
+          "id": "1",
+          "text": "\u03a9(1)"
+        },
+        {
+          "id": "n2",
+          "text": "\u03a9(n\u00b2)"
+        }
+      ],
+      "correctOptionIds": [
+        "nlogn"
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "prompt": "Merge sort worst-case time is:",
+      "options": [
+        {
+          "id": "nlogn",
+          "text": "O(n log n)"
+        },
+        {
+          "id": "n",
+          "text": "O(n)"
+        },
+        {
+          "id": "n2",
+          "text": "O(n\u00b2)"
+        },
+        {
+          "id": "logn",
+          "text": "O(log n)"
+        }
+      ],
+      "correctOptionIds": [
+        "nlogn"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "prompt": "Quicksort average time is O(n log n); worst case (bad pivots) is:",
+      "options": [
+        {
+          "id": "n2",
+          "text": "O(n\u00b2)"
+        },
+        {
+          "id": "n",
+          "text": "O(n)"
+        },
+        {
+          "id": "logn",
+          "text": "O(log n)"
+        },
+        {
+          "id": "1",
+          "text": "O(1)"
+        }
+      ],
+      "correctOptionIds": [
+        "n2"
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "mcq_multi",
+      "prompt": "Which sorts are stable (typical implementations)?\n\n- Select all that apply",
+      "options": [
+        {
+          "id": "merge",
+          "text": "Merge sort"
+        },
+        {
+          "id": "insertion",
+          "text": "Insertion sort"
+        },
+        {
+          "id": "heap",
+          "text": "Heapsort"
+        },
+        {
+          "id": "quick",
+          "text": "Classic in-place quicksort"
+        }
+      ],
+      "correctOptionIds": [
+        "merge",
+        "insertion"
+      ]
+    },
+    {
+      "id": "q5",
+      "type": "fib",
+      "prompt": "Heapsort uses a binary ____.",
+      "answers": [
+        "heap",
+        "Heap"
+      ],
+      "caseSensitive": false
+    },
+    {
+      "id": "q6",
+      "type": "mcq",
+      "prompt": "Insertion sort is efficient when:",
+      "options": [
+        {
+          "id": "nearly",
+          "text": "The array is nearly sorted / n is small"
+        },
+        {
+          "id": "huge_rand",
+          "text": "n is huge and fully random (best choice always)"
+        },
+        {
+          "id": "graphs",
+          "text": "Input is a graph"
+        },
+        {
+          "id": "strings_only",
+          "text": "Only for Unicode"
+        }
+      ],
+      "correctOptionIds": [
+        "nearly"
+      ]
+    }
+  ]
+}

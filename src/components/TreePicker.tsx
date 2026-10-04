@@ -28,31 +28,29 @@ function DirNode({
 
   return (
     <div className={styles.dir}>
-      <button
-        type="button"
-        className={styles.dirHeader}
-        onClick={() => setOpen((v) => !v)}
-        aria-expanded={open}
-      >
-        <span className={styles.chevron}>{open ? "▾" : "▸"}</span>
-        <span className={styles.title}>{node.name}/</span>
-        <span className={styles.meta}>
-          {selectedCount}/{filePaths.length}
-        </span>
+      <div className={styles.dirRow}>
+        <button
+          type="button"
+          className={styles.dirHeader}
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+        >
+          <span className={styles.chevron}>{open ? "▾" : "▸"}</span>
+          <span className={styles.title}>{node.name}/</span>
+          <span className={styles.count}>
+            {selectedCount}/{filePaths.length}
+          </span>
+        </button>
         {filePaths.length > 0 && (
           <button
             type="button"
-            className="btn btn-ghost"
-            style={{ padding: "0.25rem 0.6rem", fontSize: "0.78rem" }}
-            onClick={(e) => {
-              e.stopPropagation();
-              onToggleMany(filePaths, !allSelected);
-            }}
+            className={styles.allBtn}
+            onClick={() => onToggleMany(filePaths, !allSelected)}
           >
             {allSelected ? "Clear" : "All"}
           </button>
         )}
-      </button>
+      </div>
       {open && (
         <div className={styles.children}>
           {node.children.map((child) =>
@@ -88,25 +86,22 @@ function FileNode({
   selected: boolean;
   onToggle: () => void;
 }) {
+  const tip = [node.path, ...node.warnings].filter(Boolean).join("\n");
   return (
     <button
       type="button"
       className={`${styles.fileRow} ${selected ? styles.selected : ""}`}
       onClick={onToggle}
       disabled={!node.pathMatches}
-      title={node.warnings.join("\n")}
+      title={tip}
     >
       <input type="checkbox" checked={selected} readOnly disabled={!node.pathMatches} />
-      <span>
+      <span className={styles.main}>
         <span className={styles.title}>{node.title}</span>
-        <div className={styles.meta} style={{ marginLeft: 0 }}>
-          {node.path}
-        </div>
-        {!node.pathMatches && (
-          <div className={styles.warn}>Path mismatch — run refresh_question_paths.py</div>
-        )}
+        <span className={styles.path}>{node.path}</span>
+        {!node.pathMatches && <span className={styles.warn}>path mismatch</span>}
       </span>
-      <span className={styles.meta}>{node.questionCount} q</span>
+      <span className={styles.count}>{node.questionCount} q</span>
     </button>
   );
 }

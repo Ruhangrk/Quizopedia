@@ -1,0 +1,68 @@
+{
+  "id": "test-markdown-render",
+  "title": "Markdown Render Test",
+  "path": "questions/Test/markdown-test.json",
+  "tags": ["test", "markdown"],
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "prompt": "This prompt checks **bold**, *italic*, and `inline code`.\n\nPick the word that is emphasized as bold above.",
+      "options": [
+        { "id": "bold", "text": "bold" },
+        { "id": "italic", "text": "italic" },
+        { "id": "code", "text": "inline code" },
+        { "id": "none", "text": "none of these" }
+      ],
+      "correctOptionIds": ["bold"],
+      "explanation": "You should see **bold**, *italic*, and `inline code` rendered — not raw stars/backticks."
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "prompt": "Bullet list render check:\n\n- First bullet\n- Second bullet\n- Third bullet with `code`\n\nHow many bullets are listed?",
+      "options": [
+        { "id": "two", "text": "2" },
+        { "id": "three", "text": "3" },
+        { "id": "four", "text": "4" },
+        { "id": "one", "text": "1" }
+      ],
+      "correctOptionIds": ["three"],
+      "explanation": "Should render as a proper unordered list, not as literal `-` lines in one paragraph."
+    },
+    {
+      "id": "q3",
+      "type": "mcq_multi",
+      "prompt": "Numbered list + emphasis:\n\n1. Item **one**\n2. Item *two*\n3. Item three\n\nSelect all that appear in the list above.",
+      "options": [
+        { "id": "one", "text": "Item one" },
+        { "id": "two", "text": "Item two" },
+        { "id": "four", "text": "Item four" },
+        { "id": "three", "text": "Item three" }
+      ],
+      "correctOptionIds": ["one", "two", "three"],
+      "explanation": "Ordered list should show 1/2/3 with bold/italic inside items."
+    },
+    {
+      "id": "q4",
+      "type": "fib",
+      "prompt": "Fenced code block render check:\n\n```text\np50 = 12us\np99 = 800us\n```\n\nType the value next to `p50` (just the number with unit, e.g. 12us).",
+      "answers": ["12us", "12 us"],
+      "caseSensitive": false,
+      "explanation": "The block above should look like a code panel with two lines, not inline plain text."
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "prompt": "### Heading render check\n\nParagraph under a heading.\n\n> Blockquote line — should look distinct.\n\nAlso a link-like path: `questions/Test/markdown-test.json`\n\nWhat starts this prompt?",
+      "options": [
+        { "id": "heading", "text": "A heading (### Heading render check)" },
+        { "id": "table", "text": "A markdown table" },
+        { "id": "image", "text": "An embedded image" },
+        { "id": "html", "text": "Raw HTML script tag" }
+      ],
+      "correctOptionIds": ["heading"],
+      "explanation": "Heading + paragraph + blockquote should each have distinct styling. Tell me what looks wrong."
+    }
+  ]
+}

@@ -4,7 +4,6 @@ import {
   fsLoadAttempts,
   fsSaveAttempts,
   isFsAccessAvailable,
-  parseImportedAttempts,
   pickHistoryDirectory,
   verifyHistoryDirectory,
 } from "./historyFs";
@@ -71,25 +70,7 @@ export async function appendAttempt(attempt: Attempt): Promise<{
     return { savedToDisk: true, downloadedFallback: false };
   }
 
-  // Fallback: offer download so permanence is still possible
+  // Fallback: download attempts.json if history folder is not connected
   downloadAttemptsJson(chronological);
   return { savedToDisk: false, downloadedFallback: true };
-}
-
-export async function importAttemptsFile(file: File): Promise<number> {
-  const imported = await parseImportedAttempts(file);
-  const current = await loadAttempts();
-  const byId = new Map<string, Attempt>();
-  for (const a of current) byId.set(a.id, a);
-  for (const a of imported) byId.set(a.id, a);
-  const merged = [...byId.values()].sort(
-    (a, b) => new Date(a.finishedAt).getTime() - new Date(b.finishedAt).getTime(),
-  );
-  await idbSaveAttempts(merged);
-  await fsSaveAttempts(merged);
-  return imported.length;
-}
-
-export function exportAttempts(attempts: Attempt[]): void {
-  downloadAttemptsJson(attempts);
 }

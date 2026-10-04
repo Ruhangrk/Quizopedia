@@ -1,0 +1,156 @@
+{
+  "id": "dsa-graphs-basics",
+  "title": "Graphs Basics",
+  "path": "questions/DSA/graphs/basics.json",
+  "tags": [
+    "dsa",
+    "graphs"
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "prompt": "BFS on an unweighted graph finds:",
+      "options": [
+        {
+          "id": "shortest",
+          "text": "Shortest path in number of edges"
+        },
+        {
+          "id": "mst",
+          "text": "MST always"
+        },
+        {
+          "id": "topo",
+          "text": "Topological order always"
+        },
+        {
+          "id": "neg",
+          "text": "Negative cycle"
+        }
+      ],
+      "correctOptionIds": [
+        "shortest"
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "prompt": "DFS uses which structure (recursive or explicit)?",
+      "options": [
+        {
+          "id": "stack",
+          "text": "Stack"
+        },
+        {
+          "id": "queue",
+          "text": "Queue only"
+        },
+        {
+          "id": "heap",
+          "text": "Heap only"
+        },
+        {
+          "id": "union",
+          "text": "Union-Find only"
+        }
+      ],
+      "correctOptionIds": [
+        "stack"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "mcq_multi",
+      "prompt": "Common graph representations:\n\n- Select all that apply",
+      "options": [
+        {
+          "id": "adj_list",
+          "text": "Adjacency list"
+        },
+        {
+          "id": "adj_mat",
+          "text": "Adjacency matrix"
+        },
+        {
+          "id": "edge_list",
+          "text": "Edge list"
+        },
+        {
+          "id": "bst_only",
+          "text": "BST of vertices only (required)"
+        }
+      ],
+      "correctOptionIds": [
+        "adj_list",
+        "adj_mat",
+        "edge_list"
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "fib",
+      "prompt": "A graph with no cycles is a ____ (undirected case: forest/tree related).",
+      "answers": [
+        "forest",
+        "tree",
+        "acyclic",
+        "DAG"
+      ],
+      "caseSensitive": false,
+      "explanation": "Undirected acyclic \u2192 forest; directed acyclic \u2192 DAG."
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "prompt": "Adjacency matrix for V vertices uses roughly:",
+      "options": [
+        {
+          "id": "v2",
+          "text": "O(V\u00b2) space"
+        },
+        {
+          "id": "v",
+          "text": "O(V) space always"
+        },
+        {
+          "id": "1",
+          "text": "O(1) space"
+        },
+        {
+          "id": "e2",
+          "text": "O(E\u00b2) only"
+        }
+      ],
+      "correctOptionIds": [
+        "v2"
+      ]
+    },
+    {
+      "id": "q6",
+      "type": "mcq",
+      "prompt": "Topological sort applies to:",
+      "options": [
+        {
+          "id": "dag",
+          "text": "Directed Acyclic Graphs"
+        },
+        {
+          "id": "cycle",
+          "text": "Any graph with cycles"
+        },
+        {
+          "id": "undirected_only",
+          "text": "Only complete undirected graphs"
+        },
+        {
+          "id": "trees_only",
+          "text": "Only binary trees"
+        }
+      ],
+      "correctOptionIds": [
+        "dag"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,155 @@
+{
+  "id": "hft-latency-advanced",
+  "title": "Latency Advanced",
+  "path": "questions/hft/latency/advanced.json",
+  "tags": [
+    "hft",
+    "latency"
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "prompt": "Which metric best captures rare but severe latency spikes?",
+      "options": [
+        {
+          "id": "p50",
+          "text": "p50 / median"
+        },
+        {
+          "id": "p99",
+          "text": "p99 / high percentile"
+        },
+        {
+          "id": "mean",
+          "text": "Arithmetic mean only"
+        },
+        {
+          "id": "min",
+          "text": "Minimum latency"
+        }
+      ],
+      "correctOptionIds": [
+        "p99"
+      ],
+      "explanation": "Tail percentiles expose spikes that averages hide."
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "prompt": "Busy-polling a NIC typically trades ____ for lower latency.",
+      "options": [
+        {
+          "id": "power",
+          "text": "Higher CPU / power use"
+        },
+        {
+          "id": "accuracy",
+          "text": "Worse price accuracy"
+        },
+        {
+          "id": "bandwidth",
+          "text": "Lower network bandwidth"
+        },
+        {
+          "id": "disk",
+          "text": "More disk I/O"
+        }
+      ],
+      "correctOptionIds": [
+        "power"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "mcq_multi",
+      "prompt": "Which actions can **increase** hot-path latency?\n\n- Select all that apply",
+      "options": [
+        {
+          "id": "alloc",
+          "text": "Heap allocation on every tick"
+        },
+        {
+          "id": "log",
+          "text": "Synchronous logging"
+        },
+        {
+          "id": "pin",
+          "text": "CPU pinning the feed thread"
+        },
+        {
+          "id": "lock",
+          "text": "Contended locks"
+        }
+      ],
+      "correctOptionIds": [
+        "alloc",
+        "log",
+        "lock"
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "fib",
+      "prompt": "One-way delay is often approximated as RTT divided by ____.",
+      "answers": [
+        "2",
+        "two"
+      ],
+      "caseSensitive": false,
+      "explanation": "If the path is symmetric, one-way \u2248 RTT/2."
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "prompt": "Timestamping market data at the NIC (hardware timestamps) mainly helps with:",
+      "options": [
+        {
+          "id": "clock",
+          "text": "More accurate latency measurement"
+        },
+        {
+          "id": "pnl",
+          "text": "Guaranteed higher PnL"
+        },
+        {
+          "id": "fills",
+          "text": "Larger fill sizes"
+        },
+        {
+          "id": "fees",
+          "text": "Lower exchange fees"
+        }
+      ],
+      "correctOptionIds": [
+        "clock"
+      ]
+    },
+    {
+      "id": "q6",
+      "type": "mcq",
+      "prompt": "A sudden jump from 10\u00b5s to 10ms on one message often indicates:",
+      "options": [
+        {
+          "id": "sched",
+          "text": "Scheduling / OS / GC interruption"
+        },
+        {
+          "id": "tick",
+          "text": "Normal tick size change"
+        },
+        {
+          "id": "spread",
+          "text": "Tighter spread"
+        },
+        {
+          "id": "lot",
+          "text": "Lot size increase"
+        }
+      ],
+      "correctOptionIds": [
+        "sched"
+      ]
+    }
+  ]
+}

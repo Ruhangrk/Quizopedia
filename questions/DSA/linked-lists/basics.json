@@ -1,0 +1,152 @@
+{
+  "id": "dsa-linked-lists-basics",
+  "title": "Linked Lists Basics",
+  "path": "questions/DSA/linked-lists/basics.json",
+  "tags": [
+    "dsa",
+    "linked-lists"
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "prompt": "Accessing the k-th element of a singly linked list is typically:",
+      "options": [
+        {
+          "id": "n",
+          "text": "O(n)"
+        },
+        {
+          "id": "1",
+          "text": "O(1)"
+        },
+        {
+          "id": "logn",
+          "text": "O(log n)"
+        },
+        {
+          "id": "n2",
+          "text": "O(n\u00b2)"
+        }
+      ],
+      "correctOptionIds": [
+        "n"
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "prompt": "Inserting after a **known** node in a singly linked list is typically:",
+      "options": [
+        {
+          "id": "1",
+          "text": "O(1)"
+        },
+        {
+          "id": "n",
+          "text": "O(n)"
+        },
+        {
+          "id": "logn",
+          "text": "O(log n)"
+        },
+        {
+          "id": "nlogn",
+          "text": "O(n log n)"
+        }
+      ],
+      "correctOptionIds": [
+        "1"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "mcq_multi",
+      "prompt": "Singly linked list vs array \u2014 which are advantages of linked lists?\n\n- Select all that apply",
+      "options": [
+        {
+          "id": "insert",
+          "text": "Cheaper insert/delete given a node reference"
+        },
+        {
+          "id": "resize",
+          "text": "No need for contiguous block resize"
+        },
+        {
+          "id": "cache",
+          "text": "Usually better cache locality than arrays"
+        },
+        {
+          "id": "index",
+          "text": "O(1) random indexing"
+        }
+      ],
+      "correctOptionIds": [
+        "insert",
+        "resize"
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "fib",
+      "prompt": "A node that points to the next node uses a field often called ____.",
+      "answers": [
+        "next"
+      ],
+      "caseSensitive": false
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "prompt": "Detecting a cycle with Floyd's algorithm uses:",
+      "options": [
+        {
+          "id": "slow_fast",
+          "text": "Slow and fast pointers"
+        },
+        {
+          "id": "stack",
+          "text": "Only a stack"
+        },
+        {
+          "id": "heap",
+          "text": "A binary heap"
+        },
+        {
+          "id": "sort",
+          "text": "Sorting the list"
+        }
+      ],
+      "correctOptionIds": [
+        "slow_fast"
+      ],
+      "explanation": "Tortoise and hare."
+    },
+    {
+      "id": "q6",
+      "type": "mcq",
+      "prompt": "Reversing a singly linked list iteratively typically needs:",
+      "options": [
+        {
+          "id": "3",
+          "text": "A few pointers (prev/curr/next)"
+        },
+        {
+          "id": "arr",
+          "text": "Copying all values into an array first (required)"
+        },
+        {
+          "id": "sort",
+          "text": "Sorting"
+        },
+        {
+          "id": "hash",
+          "text": "A hash of all nodes (required)"
+        }
+      ],
+      "correctOptionIds": [
+        "3"
+      ]
+    }
+  ]
+}

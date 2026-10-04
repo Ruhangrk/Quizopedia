@@ -1,0 +1,153 @@
+{
+  "id": "dsa-complexity-big-o",
+  "title": "Big-O Complexity",
+  "path": "questions/DSA/complexity/big-o.json",
+  "tags": [
+    "dsa",
+    "complexity"
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "prompt": "Big-O describes:",
+      "options": [
+        {
+          "id": "upper",
+          "text": "An asymptotic upper bound"
+        },
+        {
+          "id": "exact",
+          "text": "Exact runtime in milliseconds"
+        },
+        {
+          "id": "lower_only",
+          "text": "Only a lower bound"
+        },
+        {
+          "id": "space_only",
+          "text": "Only disk space"
+        }
+      ],
+      "correctOptionIds": [
+        "upper"
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "prompt": "O(n) + O(n log n) simplifies to:",
+      "options": [
+        {
+          "id": "nlogn",
+          "text": "O(n log n)"
+        },
+        {
+          "id": "n",
+          "text": "O(n)"
+        },
+        {
+          "id": "1",
+          "text": "O(1)"
+        },
+        {
+          "id": "n2",
+          "text": "O(n\u00b2)"
+        }
+      ],
+      "correctOptionIds": [
+        "nlogn"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "mcq_multi",
+      "prompt": "Which grow strictly faster than O(n) as n \u2192 \u221e?\n\n- Select all that apply",
+      "options": [
+        {
+          "id": "nlogn",
+          "text": "n log n"
+        },
+        {
+          "id": "n2",
+          "text": "n\u00b2"
+        },
+        {
+          "id": "logn",
+          "text": "log n"
+        },
+        {
+          "id": "2n",
+          "text": "2\u207f"
+        }
+      ],
+      "correctOptionIds": [
+        "nlogn",
+        "n2",
+        "2n"
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "fib",
+      "prompt": "Binary search on a sorted array is ____(log n).",
+      "answers": [
+        "O",
+        "o"
+      ],
+      "caseSensitive": false
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "prompt": "Amortized O(1) append for a dynamic array means:",
+      "options": [
+        {
+          "id": "avg",
+          "text": "Average cost per append over a sequence is O(1)"
+        },
+        {
+          "id": "every",
+          "text": "Every single append is always O(1) worst-case"
+        },
+        {
+          "id": "never",
+          "text": "Append is never allowed"
+        },
+        {
+          "id": "log",
+          "text": "Append is O(log n) amortized"
+        }
+      ],
+      "correctOptionIds": [
+        "avg"
+      ]
+    },
+    {
+      "id": "q6",
+      "type": "mcq",
+      "prompt": "Space complexity of merge sort (classic) is typically:",
+      "options": [
+        {
+          "id": "n",
+          "text": "O(n) auxiliary"
+        },
+        {
+          "id": "1",
+          "text": "O(1) auxiliary always"
+        },
+        {
+          "id": "n2",
+          "text": "O(n\u00b2)"
+        },
+        {
+          "id": "logn",
+          "text": "O(log n) only"
+        }
+      ],
+      "correctOptionIds": [
+        "n"
+      ]
+    }
+  ]
+}

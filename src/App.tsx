@@ -11,6 +11,7 @@ import type {
   QuizRuntime,
   UserAnswer,
 } from "./domain/types";
+import { ThemeToggle } from "./components/ThemeToggle";
 import { HistoryPage } from "./pages/HistoryPage";
 import { HomePage } from "./pages/HomePage";
 import { QuizPage } from "./pages/QuizPage";
@@ -18,9 +19,7 @@ import { ResultsPage } from "./pages/ResultsPage";
 import {
   appendAttempt,
   connectHistoryFolder,
-  exportAttempts,
   getHistoryStatus,
-  importAttemptsFile,
   loadAttempts,
   type HistoryStatus,
 } from "./storage/historyService";
@@ -204,6 +203,7 @@ export default function App() {
               Home
             </button>
           )}
+          <ThemeToggle />
         </div>
       </header>
 
@@ -227,6 +227,7 @@ export default function App() {
           onMode={setMode}
           onToggleFile={toggleFile}
           onToggleMany={toggleMany}
+          onClearSelection={() => setSelected(new Set())}
           onStart={handleStart}
           onOpenHistory={() => {
             void refreshHistory().then(() => setScreen("history"));
@@ -284,17 +285,6 @@ export default function App() {
             setSelected(new Set(row.sources));
             setMode(row.mode);
             startWithSources(row.sources, row.mode);
-          }}
-          onExport={() => exportAttempts(attempts)}
-          onImport={(file) => {
-            void importAttemptsFile(file)
-              .then((n) => {
-                void refreshHistory();
-                setSaveNote(`Imported ${n} attempt(s).`);
-              })
-              .catch((err: unknown) =>
-                setError(err instanceof Error ? err.message : "Import failed"),
-              );
           }}
         />
       )}

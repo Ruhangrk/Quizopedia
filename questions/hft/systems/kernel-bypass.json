@@ -1,0 +1,1177 @@
+{
+  "id": "hft-systems-kernel-bypass",
+  "title": "Kernel Bypass",
+  "path": "questions/hft/systems/kernel-bypass.json",
+  "tags": [
+    "hft",
+    "systems",
+    "networking",
+    "kernel-bypass"
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "prompt": "Kernel-bypass networking aims to:",
+      "options": [
+        {
+          "id": "avoid",
+          "text": "Avoid expensive kernel networking overhead on the hot path"
+        },
+        {
+          "id": "replace_cpu",
+          "text": "Replace the CPU with an FPGA always"
+        },
+        {
+          "id": "delete_nic",
+          "text": "Remove the NIC"
+        },
+        {
+          "id": "gui",
+          "text": "Speed up the GUI"
+        }
+      ],
+      "correctOptionIds": [
+        "avoid"
+      ],
+      "explanation": "Bypass moves packet I/O closer to user space / NIC."
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "prompt": "DPDK is best described as:",
+      "options": [
+        {
+          "id": "userspace",
+          "text": "A userspace packet-processing framework"
+        },
+        {
+          "id": "fs",
+          "text": "A filesystem"
+        },
+        {
+          "id": "db",
+          "text": "A database"
+        },
+        {
+          "id": "lang",
+          "text": "A programming language"
+        }
+      ],
+      "correctOptionIds": [
+        "userspace"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "prompt": "Busy polling for packets typically:",
+      "options": [
+        {
+          "id": "spin",
+          "text": "Spins waiting for packets (higher CPU, lower latency)"
+        },
+        {
+          "id": "sleep",
+          "text": "Sleeps 1 second between checks"
+        },
+        {
+          "id": "disk",
+          "text": "Writes each packet to disk first"
+        },
+        {
+          "id": "dns",
+          "text": "Resolves DNS each time"
+        }
+      ],
+      "correctOptionIds": [
+        "spin"
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "mcq_multi",
+      "prompt": "Which are common ingredients of low-latency networking stacks?\n\n- Select all that apply",
+      "options": [
+        {
+          "id": "bypass",
+          "text": "Kernel bypass / userspace drivers"
+        },
+        {
+          "id": "pin",
+          "text": "CPU isolation / pinning"
+        },
+        {
+          "id": "irq",
+          "text": "IRQ affinity tuning"
+        },
+        {
+          "id": "gc_hot",
+          "text": "Stop-the-world GC on the packet path"
+        }
+      ],
+      "correctOptionIds": [
+        "bypass",
+        "pin",
+        "irq"
+      ]
+    },
+    {
+      "id": "q5",
+      "type": "fib",
+      "prompt": "RDMA stands for Remote Direct ____ Access.",
+      "answers": [
+        "Memory",
+        "memory"
+      ],
+      "caseSensitive": false,
+      "explanation": "Remote Direct Memory Access."
+    },
+    {
+      "id": "q6",
+      "type": "mcq",
+      "prompt": "Zero-copy I/O tries to avoid:",
+      "options": [
+        {
+          "id": "copies",
+          "text": "Extra memory copies of packet payloads"
+        },
+        {
+          "id": "routing",
+          "text": "All routing"
+        },
+        {
+          "id": "multicast",
+          "text": "Multicast"
+        },
+        {
+          "id": "checksums",
+          "text": "All checksums forever"
+        }
+      ],
+      "correctOptionIds": [
+        "copies"
+      ]
+    },
+    {
+      "id": "q7",
+      "type": "mcq",
+      "prompt": "A user-space TCP stack is used when:",
+      "options": [
+        {
+          "id": "control",
+          "text": "You want TCP semantics with bypass-level control"
+        },
+        {
+          "id": "udp_only",
+          "text": "Only UDP exists on Earth"
+        },
+        {
+          "id": "http2",
+          "text": "HTTP/2 is banned"
+        },
+        {
+          "id": "excel",
+          "text": "Excel is the matching engine"
+        }
+      ],
+      "correctOptionIds": [
+        "control"
+      ]
+    },
+    {
+      "id": "q8",
+      "type": "mcq",
+      "prompt": "NIC timestamping helps measure:",
+      "options": [
+        {
+          "id": "wire",
+          "text": "Closer-to-wire arrival/departure times"
+        },
+        {
+          "id": "pnl",
+          "text": "Strategy Sharpe"
+        },
+        {
+          "id": "fees",
+          "text": "Fee schedules"
+        },
+        {
+          "id": "beta",
+          "text": "Market beta"
+        }
+      ],
+      "correctOptionIds": [
+        "wire"
+      ]
+    },
+    {
+      "id": "q9",
+      "type": "mcq_multi",
+      "prompt": "Sources of latency outside your process include:\n\n- Select all that apply",
+      "options": [
+        {
+          "id": "switch",
+          "text": "Switch hops"
+        },
+        {
+          "id": "serialization",
+          "text": "Serialization delay on the wire"
+        },
+        {
+          "id": "os",
+          "text": "OS scheduling"
+        },
+        {
+          "id": "comment",
+          "text": "Code comments"
+        }
+      ],
+      "correctOptionIds": [
+        "switch",
+        "serialization",
+        "os"
+      ]
+    },
+    {
+      "id": "q10",
+      "type": "fib",
+      "prompt": "PCIe stands for Peripheral Component ____ Express.",
+      "answers": [
+        "Interconnect"
+      ],
+      "caseSensitive": false,
+      "explanation": "Peripheral Component Interconnect Express."
+    },
+    {
+      "id": "q11",
+      "type": "mcq",
+      "prompt": "Huge pages can help latency-sensitive apps by:",
+      "options": [
+        {
+          "id": "tlb",
+          "text": "Reducing TLB misses"
+        },
+        {
+          "id": "fees",
+          "text": "Cutting exchange fees"
+        },
+        {
+          "id": "spread",
+          "text": "Tightening spreads automatically"
+        },
+        {
+          "id": "symbol",
+          "text": "Shortening ticker symbols"
+        }
+      ],
+      "correctOptionIds": [
+        "tlb"
+      ]
+    },
+    {
+      "id": "q12",
+      "type": "mcq",
+      "prompt": "NUMA-aware allocation matters because:",
+      "options": [
+        {
+          "id": "remote",
+          "text": "Remote memory access is slower"
+        },
+        {
+          "id": "same",
+          "text": "All memory is identical latency always"
+        },
+        {
+          "id": "gpu",
+          "text": "Only GPUs have memory"
+        },
+        {
+          "id": "disk",
+          "text": "NUMA only affects disks"
+        }
+      ],
+      "correctOptionIds": [
+        "remote"
+      ]
+    },
+    {
+      "id": "q13",
+      "type": "mcq",
+      "prompt": "CPU isolation (isolcpus / nohz_full style setups) aims to:",
+      "options": [
+        {
+          "id": "jitter",
+          "text": "Reduce OS jitter on reserved cores"
+        },
+        {
+          "id": "cores",
+          "text": "Remove all cores"
+        },
+        {
+          "id": "ram",
+          "text": "Double RAM latency"
+        },
+        {
+          "id": "wifi",
+          "text": "Prefer Wi-Fi"
+        }
+      ],
+      "correctOptionIds": [
+        "jitter"
+      ]
+    },
+    {
+      "id": "q14",
+      "type": "mcq_multi",
+      "prompt": "Which belong on a **cold** path, not the packet hot path?\n\n- Select all that apply",
+      "options": [
+        {
+          "id": "metrics_batch",
+          "text": "Batched metrics flush"
+        },
+        {
+          "id": "json_log",
+          "text": "Verbose JSON logging"
+        },
+        {
+          "id": "parse_hdr",
+          "text": "Parsing the packet header you need"
+        },
+        {
+          "id": "ui",
+          "text": "Updating a dashboard widget"
+        }
+      ],
+      "correctOptionIds": [
+        "metrics_batch",
+        "json_log",
+        "ui"
+      ]
+    },
+    {
+      "id": "q15",
+      "type": "fib",
+      "prompt": "RSS in NICs often means Receive Side ____.",
+      "answers": [
+        "Scaling",
+        "scaling"
+      ],
+      "caseSensitive": false
+    },
+    {
+      "id": "q16",
+      "type": "mcq",
+      "prompt": "RSS steers flows to different queues to:",
+      "options": [
+        {
+          "id": "parallel",
+          "text": "Parallelize receive processing across cores"
+        },
+        {
+          "id": "encrypt",
+          "text": "Encrypt UDP"
+        },
+        {
+          "id": "compress",
+          "text": "Compress PCAP"
+        },
+        {
+          "id": "halt",
+          "text": "Halt markets"
+        }
+      ],
+      "correctOptionIds": [
+        "parallel"
+      ]
+    },
+    {
+      "id": "q17",
+      "type": "mcq",
+      "prompt": "A memory barrier / fence is used to:",
+      "options": [
+        {
+          "id": "order",
+          "text": "Enforce ordering of memory operations"
+        },
+        {
+          "id": "block_ip",
+          "text": "Block an IP"
+        },
+        {
+          "id": "fee",
+          "text": "Compute fees"
+        },
+        {
+          "id": "gui",
+          "text": "Redraw UI"
+        }
+      ],
+      "correctOptionIds": [
+        "order"
+      ]
+    },
+    {
+      "id": "q18",
+      "type": "mcq",
+      "prompt": "Lock-free structures are attractive on hot paths because:",
+      "options": [
+        {
+          "id": "contention",
+          "text": "They can reduce lock contention / blocking"
+        },
+        {
+          "id": "syntax",
+          "text": "They need no testing"
+        },
+        {
+          "id": "gc",
+          "text": "They disable GC forever"
+        },
+        {
+          "id": "disk",
+          "text": "They persist to disk automatically"
+        }
+      ],
+      "correctOptionIds": [
+        "contention"
+      ]
+    },
+    {
+      "id": "q19",
+      "type": "mcq_multi",
+      "prompt": "Which clocks are relevant in latency measurement?\n\n- Select all that apply",
+      "options": [
+        {
+          "id": "tsc",
+          "text": "TSC / cycle counters"
+        },
+        {
+          "id": "phc",
+          "text": "NIC PHC / hardware clocks"
+        },
+        {
+          "id": "wall",
+          "text": "Wall clock for logs"
+        },
+        {
+          "id": "moon",
+          "text": "Moon phase clock"
+        }
+      ],
+      "correctOptionIds": [
+        "tsc",
+        "phc",
+        "wall"
+      ]
+    },
+    {
+      "id": "q20",
+      "type": "fib",
+      "prompt": "PTP is the Precision ____ Protocol.",
+      "answers": [
+        "Time",
+        "time"
+      ],
+      "caseSensitive": false
+    },
+    {
+      "id": "q21",
+      "type": "mcq",
+      "prompt": "PTP is used in trading infra mainly to:",
+      "options": [
+        {
+          "id": "sync",
+          "text": "Synchronize clocks across machines"
+        },
+        {
+          "id": "route",
+          "text": "Route orders to dark pools"
+        },
+        {
+          "id": "compress",
+          "text": "Compress tick data"
+        },
+        {
+          "id": "ui",
+          "text": "Theme the UI"
+        }
+      ],
+      "correctOptionIds": [
+        "sync"
+      ]
+    },
+    {
+      "id": "q22",
+      "type": "mcq",
+      "prompt": "A feed handler's primary job is to:",
+      "options": [
+        {
+          "id": "normalize",
+          "text": "Ingest and normalize market data for strategies"
+        },
+        {
+          "id": "clear",
+          "text": "Clear trades at the CCP"
+        },
+        {
+          "id": "hr",
+          "text": "Hire traders"
+        },
+        {
+          "id": "paint",
+          "text": "Paint charts only"
+        }
+      ],
+      "correctOptionIds": [
+        "normalize"
+      ]
+    },
+    {
+      "id": "q23",
+      "type": "mcq",
+      "prompt": "Sequence numbers on a multicast feed primarily detect:",
+      "options": [
+        {
+          "id": "gaps",
+          "text": "Gaps / losses"
+        },
+        {
+          "id": "pnl",
+          "text": "PnL"
+        },
+        {
+          "id": "beta",
+          "text": "Beta"
+        },
+        {
+          "id": "dividends",
+          "text": "Dividends"
+        }
+      ],
+      "correctOptionIds": [
+        "gaps"
+      ]
+    },
+    {
+      "id": "q24",
+      "type": "mcq_multi",
+      "prompt": "On packet loss, a robust feed handler may:\n\n- Select all that apply",
+      "options": [
+        {
+          "id": "gap_fill",
+          "text": "Request a gap fill / snapshot"
+        },
+        {
+          "id": "mark",
+          "text": "Mark the book as suspect until recovered"
+        },
+        {
+          "id": "ignore_all",
+          "text": "Ignore all future packets forever"
+        },
+        {
+          "id": "alert",
+          "text": "Alert / metric the gap"
+        }
+      ],
+      "correctOptionIds": [
+        "gap_fill",
+        "mark",
+        "alert"
+      ]
+    },
+    {
+      "id": "q25",
+      "type": "fib",
+      "prompt": "FPGA stands for Field-Programmable ____ Array.",
+      "answers": [
+        "Gate",
+        "gate"
+      ],
+      "caseSensitive": false
+    },
+    {
+      "id": "q26",
+      "type": "mcq",
+      "prompt": "FPGAs are used in HFT mainly for:",
+      "options": [
+        {
+          "id": "determinism",
+          "text": "Very low, deterministic processing near the wire"
+        },
+        {
+          "id": "spreadsheets",
+          "text": "Running Excel macros"
+        },
+        {
+          "id": "email",
+          "text": "Sending email"
+        },
+        {
+          "id": "hr",
+          "text": "Payroll"
+        }
+      ],
+      "correctOptionIds": [
+        "determinism"
+      ]
+    },
+    {
+      "id": "q27",
+      "type": "mcq",
+      "prompt": "Kernel bypass usually still requires careful handling of:",
+      "options": [
+        {
+          "id": "memory",
+          "text": "Memory pools / buffer ownership"
+        },
+        {
+          "id": "css",
+          "text": "CSS layouts"
+        },
+        {
+          "id": "fonts",
+          "text": "Font kerning"
+        },
+        {
+          "id": "slides",
+          "text": "Slide decks"
+        }
+      ],
+      "correctOptionIds": [
+        "memory"
+      ]
+    },
+    {
+      "id": "q28",
+      "type": "mcq",
+      "prompt": "Interrupt coalescing can:",
+      "options": [
+        {
+          "id": "batch",
+          "text": "Batch interrupts (can raise latency, lower CPU)"
+        },
+        {
+          "id": "delete",
+          "text": "Delete packets"
+        },
+        {
+          "id": "double",
+          "text": "Double link speed"
+        },
+        {
+          "id": "rename",
+          "text": "Rename interfaces"
+        }
+      ],
+      "correctOptionIds": [
+        "batch"
+      ]
+    },
+    {
+      "id": "q29",
+      "type": "mcq_multi",
+      "prompt": "Which NIC features can help trading stacks?\n\n- Select all that apply",
+      "options": [
+        {
+          "id": "hw_ts",
+          "text": "Hardware timestamping"
+        },
+        {
+          "id": "multi_q",
+          "text": "Multiple queues"
+        },
+        {
+          "id": "busy_poll",
+          "text": "Busy poll support"
+        },
+        {
+          "id": "spinning_rust",
+          "text": "Requiring HDD for every packet"
+        }
+      ],
+      "correctOptionIds": [
+        "hw_ts",
+        "multi_q",
+        "busy_poll"
+      ]
+    },
+    {
+      "id": "q30",
+      "type": "fib",
+      "prompt": "DMA stands for Direct ____ Access.",
+      "answers": [
+        "Memory",
+        "memory"
+      ],
+      "caseSensitive": false
+    },
+    {
+      "id": "q31",
+      "type": "mcq",
+      "prompt": "DMA helps networking performance by:",
+      "options": [
+        {
+          "id": "cpu",
+          "text": "Letting devices move data with less CPU copying"
+        },
+        {
+          "id": "dns",
+          "text": "Caching DNS"
+        },
+        {
+          "id": "ui",
+          "text": "Animating UI"
+        },
+        {
+          "id": "pdf",
+          "text": "Rendering PDFs"
+        }
+      ],
+      "correctOptionIds": [
+        "cpu"
+      ]
+    },
+    {
+      "id": "q32",
+      "type": "mcq",
+      "prompt": "A spinlock held too long on a hot path is bad because:",
+      "options": [
+        {
+          "id": "stall",
+          "text": "Other cores waste time spinning"
+        },
+        {
+          "id": "fee",
+          "text": "Fees increase automatically"
+        },
+        {
+          "id": "tick",
+          "text": "Tick size changes"
+        },
+        {
+          "id": "ipo",
+          "text": "IPO fails"
+        }
+      ],
+      "correctOptionIds": [
+        "stall"
+      ]
+    },
+    {
+      "id": "q33",
+      "type": "mcq",
+      "prompt": "Prefetching is most useful when:",
+      "options": [
+        {
+          "id": "predictable",
+          "text": "Access patterns are somewhat predictable"
+        },
+        {
+          "id": "random_pure",
+          "text": "Access is pure cryptographic randomness always"
+        },
+        {
+          "id": "disk_only",
+          "text": "Data is only on tape"
+        },
+        {
+          "id": "gui",
+          "text": "Drawing buttons"
+        }
+      ],
+      "correctOptionIds": [
+        "predictable"
+      ]
+    },
+    {
+      "id": "q34",
+      "type": "mcq_multi",
+      "prompt": "Good production hardening for a bypass app includes:\n\n- Select all that apply",
+      "options": [
+        {
+          "id": "watchdog",
+          "text": "Watchdogs / heartbeats"
+        },
+        {
+          "id": "limits",
+          "text": "Resource / rate limits"
+        },
+        {
+          "id": "runbooks",
+          "text": "Operational runbooks"
+        },
+        {
+          "id": "secrets_in_git",
+          "text": "Committing production secrets to git"
+        }
+      ],
+      "correctOptionIds": [
+        "watchdog",
+        "limits",
+        "runbooks"
+      ]
+    },
+    {
+      "id": "q35",
+      "type": "fib",
+      "prompt": "SOCK_____ is a Linux socket type associated with raw packet access (fill RAW).",
+      "answers": [
+        "RAW",
+        "raw"
+      ],
+      "caseSensitive": false,
+      "explanation": "SOCK_RAW."
+    },
+    {
+      "id": "q36",
+      "type": "mcq",
+      "prompt": "AF_XDP is:",
+      "options": [
+        {
+          "id": "linux",
+          "text": "A Linux high-performance packet path into user space"
+        },
+        {
+          "id": "windows_only",
+          "text": "Windows-only GUI API"
+        },
+        {
+          "id": "db",
+          "text": "A SQL dialect"
+        },
+        {
+          "id": "cloud_bill",
+          "text": "A billing SKU"
+        }
+      ],
+      "correctOptionIds": [
+        "linux"
+      ]
+    },
+    {
+      "id": "q37",
+      "type": "mcq",
+      "prompt": "Checksum offload moves work to:",
+      "options": [
+        {
+          "id": "nic",
+          "text": "The NIC / hardware"
+        },
+        {
+          "id": "trader",
+          "text": "The trader"
+        },
+        {
+          "id": "excel",
+          "text": "Excel"
+        },
+        {
+          "id": "printer",
+          "text": "The printer"
+        }
+      ],
+      "correctOptionIds": [
+        "nic"
+      ]
+    },
+    {
+      "id": "q38",
+      "type": "mcq",
+      "prompt": "A cold cache after a context switch can cause:",
+      "options": [
+        {
+          "id": "spike",
+          "text": "A latency spike"
+        },
+        {
+          "id": "tighter",
+          "text": "Tighter spreads automatically"
+        },
+        {
+          "id": "free",
+          "text": "Free colocations"
+        },
+        {
+          "id": "zero_rtt",
+          "text": "Zero RTT to the Moon"
+        }
+      ],
+      "correctOptionIds": [
+        "spike"
+      ]
+    },
+    {
+      "id": "q39",
+      "type": "mcq_multi",
+      "prompt": "Which are **anti-patterns** on an HFT receive path?\n\n- Select all that apply",
+      "options": [
+        {
+          "id": "malloc",
+          "text": "malloc/free per packet"
+        },
+        {
+          "id": "mutex_global",
+          "text": "One global mutex for all packets"
+        },
+        {
+          "id": "printf",
+          "text": "printf per packet"
+        },
+        {
+          "id": "inline_parse",
+          "text": "Tight inline parsing of needed fields"
+        }
+      ],
+      "correctOptionIds": [
+        "malloc",
+        "mutex_global",
+        "printf"
+      ]
+    },
+    {
+      "id": "q40",
+      "type": "fib",
+      "prompt": "The Linux page cache caches ____-backed pages in memory (disk).",
+      "answers": [
+        "disk",
+        "Disk"
+      ],
+      "caseSensitive": false
+    },
+    {
+      "id": "q41",
+      "type": "mcq",
+      "prompt": "Huge TLB / large pages reduce:",
+      "options": [
+        {
+          "id": "walks",
+          "text": "Page-table walk overhead / TLB pressure"
+        },
+        {
+          "id": "symbols",
+          "text": "Number of tickers"
+        },
+        {
+          "id": "boards",
+          "text": "Exchange boards"
+        },
+        {
+          "id": "traders",
+          "text": "Headcount"
+        }
+      ],
+      "correctOptionIds": [
+        "walks"
+      ]
+    },
+    {
+      "id": "q42",
+      "type": "mcq",
+      "prompt": "Kernel bypass does **not** remove the need for:",
+      "options": [
+        {
+          "id": "correctness",
+          "text": "Correct protocol / gap handling / risk controls"
+        },
+        {
+          "id": "cables",
+          "text": "Physics of cables"
+        },
+        {
+          "id": "both",
+          "text": "Both correctness and physical limits"
+        },
+        {
+          "id": "neither",
+          "text": "Neither \u2014 bypass solves everything"
+        }
+      ],
+      "correctOptionIds": [
+        "both"
+      ]
+    },
+    {
+      "id": "q43",
+      "type": "mcq",
+      "prompt": "Jitter is:",
+      "options": [
+        {
+          "id": "var",
+          "text": "Variation in latency"
+        },
+        {
+          "id": "mean",
+          "text": "Exactly the mean latency"
+        },
+        {
+          "id": "fee",
+          "text": "A fee type"
+        },
+        {
+          "id": "order",
+          "text": "An order type"
+        }
+      ],
+      "correctOptionIds": [
+        "var"
+      ]
+    },
+    {
+      "id": "q44",
+      "type": "mcq_multi",
+      "prompt": "Ways to study packet latency in lab/prod:\n\n- Select all that apply",
+      "options": [
+        {
+          "id": "hw_ts",
+          "text": "Hardware timestamps"
+        },
+        {
+          "id": "pcap",
+          "text": "Packet captures"
+        },
+        {
+          "id": "hist",
+          "text": "Latency histograms"
+        },
+        {
+          "id": "guess",
+          "text": "Only vibes, no data"
+        }
+      ],
+      "correctOptionIds": [
+        "hw_ts",
+        "pcap",
+        "hist"
+      ]
+    },
+    {
+      "id": "q45",
+      "type": "fib",
+      "prompt": "NIC is short for Network ____ Card (or Controller).",
+      "answers": [
+        "Interface",
+        "interface"
+      ],
+      "caseSensitive": false
+    },
+    {
+      "id": "q46",
+      "type": "mcq",
+      "prompt": "Colocation helps because it reduces:",
+      "options": [
+        {
+          "id": "distance",
+          "text": "Physical distance / network RTT to the matching engine"
+        },
+        {
+          "id": "knowledge",
+          "text": "Need for market knowledge"
+        },
+        {
+          "id": "testing",
+          "text": "Need for testing"
+        },
+        {
+          "id": "power",
+          "text": "Need for electricity"
+        }
+      ],
+      "correctOptionIds": [
+        "distance"
+      ]
+    },
+    {
+      "id": "q47",
+      "type": "mcq",
+      "prompt": "A shared memory queue between feed handler and strategy is used to:",
+      "options": [
+        {
+          "id": "handoff",
+          "text": "Hand off data with low overhead"
+        },
+        {
+          "id": "email",
+          "text": "Email fills"
+        },
+        {
+          "id": "pdf",
+          "text": "Archive PDFs"
+        },
+        {
+          "id": "hr",
+          "text": "Approve leave"
+        }
+      ],
+      "correctOptionIds": [
+        "handoff"
+      ]
+    },
+    {
+      "id": "q48",
+      "type": "mcq",
+      "prompt": "Backpressure in a pipeline means:",
+      "options": [
+        {
+          "id": "slow",
+          "text": "Slowing/dropping intake when downstream can't keep up"
+        },
+        {
+          "id": "faster",
+          "text": "Always going faster"
+        },
+        {
+          "id": "fee",
+          "text": "Raising fees"
+        },
+        {
+          "id": "halt_exchange",
+          "text": "Halting the exchange"
+        }
+      ],
+      "correctOptionIds": [
+        "slow"
+      ]
+    },
+    {
+      "id": "q49",
+      "type": "mcq_multi",
+      "prompt": "Which statements are true?\n\n- Select all that apply",
+      "options": [
+        {
+          "id": "measure",
+          "text": "You must measure \u2014 intuition is not enough"
+        },
+        {
+          "id": "p99",
+          "text": "Tail latency matters in HFT"
+        },
+        {
+          "id": "avg_only",
+          "text": "Average latency alone is sufficient"
+        },
+        {
+          "id": "bypass_magic",
+          "text": "Bypass removes all jitter forever"
+        }
+      ],
+      "correctOptionIds": [
+        "measure",
+        "p99"
+      ]
+    },
+    {
+      "id": "q50",
+      "type": "fib",
+      "prompt": "HFT commonly optimizes for low ____ (latency).",
+      "answers": [
+        "latency",
+        "Latency",
+        "delay",
+        "Delay"
+      ],
+      "caseSensitive": false
+    }
+  ]
+}

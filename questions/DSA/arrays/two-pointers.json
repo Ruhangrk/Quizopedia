@@ -1,0 +1,128 @@
+{
+  "id": "dsa-arrays-two-pointers",
+  "title": "Two Pointers",
+  "path": "questions/DSA/arrays/two-pointers.json",
+  "tags": [
+    "dsa",
+    "arrays",
+    "two-pointers"
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "prompt": "For a sorted array, left/right pointers moving inward often give:",
+      "options": [
+        {
+          "id": "n",
+          "text": "O(n) solutions for pair problems"
+        },
+        {
+          "id": "n2",
+          "text": "Only O(n\u00b2) solutions"
+        },
+        {
+          "id": "exp",
+          "text": "Exponential time"
+        },
+        {
+          "id": "const",
+          "text": "O(1) always regardless of n"
+        }
+      ],
+      "correctOptionIds": [
+        "n"
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "prompt": "In the Dutch National Flag problem, three pointers typically partition into:",
+      "options": [
+        {
+          "id": "3",
+          "text": "Three regions (e.g. 0s, 1s, 2s)"
+        },
+        {
+          "id": "2",
+          "text": "Only two stacks"
+        },
+        {
+          "id": "heap",
+          "text": "A max-heap"
+        },
+        {
+          "id": "bst",
+          "text": "A BST"
+        }
+      ],
+      "correctOptionIds": [
+        "3"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "mcq_multi",
+      "prompt": "Which problems fit two pointers well?\n\n- Select all that apply",
+      "options": [
+        {
+          "id": "container",
+          "text": "Container With Most Water"
+        },
+        {
+          "id": "palindrome",
+          "text": "Valid palindrome check"
+        },
+        {
+          "id": "dijkstra",
+          "text": "Dijkstra on dense graphs"
+        },
+        {
+          "id": "remove",
+          "text": "Remove duplicates from sorted array"
+        }
+      ],
+      "correctOptionIds": [
+        "container",
+        "palindrome",
+        "remove"
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "fib",
+      "prompt": "When both pointers only move forward, the pattern is often called the ____ window.",
+      "answers": [
+        "sliding",
+        "Sliding"
+      ],
+      "caseSensitive": false
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "prompt": "If the array is **unsorted** and you need a pair summing to target in O(n) expected time, prefer:",
+      "options": [
+        {
+          "id": "hash",
+          "text": "Hash set / hash map"
+        },
+        {
+          "id": "two_only",
+          "text": "Two pointers only without sorting"
+        },
+        {
+          "id": "bubble",
+          "text": "Bubble sort each query"
+        },
+        {
+          "id": "bfs",
+          "text": "BFS"
+        }
+      ],
+      "correctOptionIds": [
+        "hash"
+      ]
+    }
+  ]
+}

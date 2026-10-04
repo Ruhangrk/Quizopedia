@@ -1,0 +1,154 @@
+{
+  "id": "dsa-trees-bst",
+  "title": "Binary Search Trees",
+  "path": "questions/DSA/trees/bst.json",
+  "tags": [
+    "dsa",
+    "trees",
+    "bst"
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "prompt": "In a BST, for every node, left subtree keys are ____ the node key.",
+      "options": [
+        {
+          "id": "lt",
+          "text": "Less than (typical)"
+        },
+        {
+          "id": "gt",
+          "text": "Always greater"
+        },
+        {
+          "id": "eq",
+          "text": "Always equal"
+        },
+        {
+          "id": "rand",
+          "text": "Random"
+        }
+      ],
+      "correctOptionIds": [
+        "lt"
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "prompt": "Average search time in a balanced BST is:",
+      "options": [
+        {
+          "id": "logn",
+          "text": "O(log n)"
+        },
+        {
+          "id": "n",
+          "text": "O(n)"
+        },
+        {
+          "id": "1",
+          "text": "O(1)"
+        },
+        {
+          "id": "n2",
+          "text": "O(n\u00b2)"
+        }
+      ],
+      "correctOptionIds": [
+        "logn"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "prompt": "Worst-case search in a **skewed** BST is:",
+      "options": [
+        {
+          "id": "n",
+          "text": "O(n)"
+        },
+        {
+          "id": "logn",
+          "text": "O(log n)"
+        },
+        {
+          "id": "1",
+          "text": "O(1)"
+        },
+        {
+          "id": "nlogn",
+          "text": "O(n log n)"
+        }
+      ],
+      "correctOptionIds": [
+        "n"
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "mcq_multi",
+      "prompt": "Self-balancing BSTs include:\n\n- Select all that apply",
+      "options": [
+        {
+          "id": "avl",
+          "text": "AVL tree"
+        },
+        {
+          "id": "rb",
+          "text": "Red-Black tree"
+        },
+        {
+          "id": "slist",
+          "text": "Singly linked list"
+        },
+        {
+          "id": "treap",
+          "text": "Treap"
+        }
+      ],
+      "correctOptionIds": [
+        "avl",
+        "rb",
+        "treap"
+      ]
+    },
+    {
+      "id": "q5",
+      "type": "fib",
+      "prompt": "The smallest key in a BST is found by going ____ from the root until null.",
+      "answers": [
+        "left",
+        "Left"
+      ],
+      "caseSensitive": false
+    },
+    {
+      "id": "q6",
+      "type": "mcq",
+      "prompt": "Deleting a BST node with two children typically replaces it with:",
+      "options": [
+        {
+          "id": "succ",
+          "text": "Inorder successor or predecessor"
+        },
+        {
+          "id": "root",
+          "text": "Always the root"
+        },
+        {
+          "id": "rand",
+          "text": "A random leaf only"
+        },
+        {
+          "id": "parent",
+          "text": "Its parent"
+        }
+      ],
+      "correctOptionIds": [
+        "succ"
+      ]
+    }
+  ]
+}

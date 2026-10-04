@@ -1,0 +1,153 @@
+{
+  "id": "hft-matching-matching-engine",
+  "title": "Matching Engine",
+  "path": "questions/hft/matching/matching-engine.json",
+  "tags": [
+    "hft",
+    "matching"
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "prompt": "Price-time priority means:",
+      "options": [
+        {
+          "id": "pt",
+          "text": "Better price first; earlier time at that price next"
+        },
+        {
+          "id": "tp",
+          "text": "Earlier time always beats better price"
+        },
+        {
+          "id": "size",
+          "text": "Largest size always first"
+        },
+        {
+          "id": "rand",
+          "text": "Random among all orders"
+        }
+      ],
+      "correctOptionIds": [
+        "pt"
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "prompt": "A resting limit order that provides liquidity is typically making a ____.",
+      "options": [
+        {
+          "id": "quote",
+          "text": "Quote / passive order"
+        },
+        {
+          "id": "sweep",
+          "text": "Market sweep only"
+        },
+        {
+          "id": "ioc_always",
+          "text": "Always an IOC"
+        },
+        {
+          "id": "stop",
+          "text": "Stop-loss by definition"
+        }
+      ],
+      "correctOptionIds": [
+        "quote"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "mcq_multi",
+      "prompt": "Which order types usually **do not** rest on the book?\n\n- Select all that apply",
+      "options": [
+        {
+          "id": "market",
+          "text": "Market orders"
+        },
+        {
+          "id": "ioc",
+          "text": "Immediate-or-cancel (IOC)"
+        },
+        {
+          "id": "gtc",
+          "text": "Good-til-cancelled limit"
+        },
+        {
+          "id": "fok",
+          "text": "Fill-or-kill (FOK)"
+        }
+      ],
+      "correctOptionIds": [
+        "market",
+        "ioc",
+        "fok"
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "fib",
+      "prompt": "The difference between best ask and best bid is the ____.",
+      "answers": [
+        "spread"
+      ],
+      "caseSensitive": false,
+      "explanation": "Bid-ask spread."
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "prompt": "Self-match prevention is designed to:",
+      "options": [
+        {
+          "id": "prevent",
+          "text": "Stop a firm from trading against its own orders"
+        },
+        {
+          "id": "speed",
+          "text": "Always increase matching speed"
+        },
+        {
+          "id": "fees",
+          "text": "Remove all fees"
+        },
+        {
+          "id": "halt",
+          "text": "Halt the entire market"
+        }
+      ],
+      "correctOptionIds": [
+        "prevent"
+      ]
+    },
+    {
+      "id": "q6",
+      "type": "mcq",
+      "prompt": "In continuous matching, incoming orders are matched:",
+      "options": [
+        {
+          "id": "cont",
+          "text": "As they arrive against the resting book"
+        },
+        {
+          "id": "batch_only",
+          "text": "Only once per day"
+        },
+        {
+          "id": "random",
+          "text": "At random intervals only"
+        },
+        {
+          "id": "manual",
+          "text": "Only after manual approval"
+        }
+      ],
+      "correctOptionIds": [
+        "cont"
+      ]
+    }
+  ]
+}

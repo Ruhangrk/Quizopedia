@@ -1,0 +1,130 @@
+{
+  "id": "hft-networking-tcp-vs-udp",
+  "title": "TCP vs UDP",
+  "path": "questions/hft/networking/tcp-vs-udp.json",
+  "tags": [
+    "hft",
+    "networking",
+    "tcp",
+    "udp"
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "prompt": "TCP is generally preferred over UDP when you need:",
+      "options": [
+        {
+          "id": "reliable",
+          "text": "Reliable, ordered byte streams"
+        },
+        {
+          "id": "fanout",
+          "text": "Lowest-overhead one-to-many fanout"
+        },
+        {
+          "id": "no_conn",
+          "text": "No connection state ever"
+        },
+        {
+          "id": "bcast",
+          "text": "Layer-2 broadcast only"
+        }
+      ],
+      "correctOptionIds": [
+        "reliable"
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "prompt": "Nagle's algorithm can hurt latency because it:",
+      "options": [
+        {
+          "id": "delay",
+          "text": "May delay sending small packets"
+        },
+        {
+          "id": "drop",
+          "text": "Drops every other packet"
+        },
+        {
+          "id": "encrypt",
+          "text": "Forces encryption"
+        },
+        {
+          "id": "mtu",
+          "text": "Increases MTU randomly"
+        }
+      ],
+      "correctOptionIds": [
+        "delay"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "mcq_multi",
+      "prompt": "Which TCP behaviors can add latency jitter?\n\n- Select all that apply",
+      "options": [
+        {
+          "id": "rtx",
+          "text": "Retransmissions"
+        },
+        {
+          "id": "cwnd",
+          "text": "Congestion window backoff"
+        },
+        {
+          "id": "handshake",
+          "text": "Connection handshake / teardown"
+        },
+        {
+          "id": "udp_csum",
+          "text": "UDP checksum offload"
+        }
+      ],
+      "correctOptionIds": [
+        "rtx",
+        "cwnd",
+        "handshake"
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "fib",
+      "prompt": "Disabling Nagle is commonly done with the TCP_____DELAY socket option (fill the blank word before DELAY).",
+      "answers": [
+        "NO",
+        "no"
+      ],
+      "caseSensitive": false,
+      "explanation": "TCP_NODELAY."
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "prompt": "For order entry sessions, firms often choose TCP because:",
+      "options": [
+        {
+          "id": "integrity",
+          "text": "Message integrity and recovery matter"
+        },
+        {
+          "id": "lossy_ok",
+          "text": "Lossy delivery is preferred"
+        },
+        {
+          "id": "multi",
+          "text": "Native multicast is required"
+        },
+        {
+          "id": "no_ack",
+          "text": "ACKs are never useful"
+        }
+      ],
+      "correctOptionIds": [
+        "integrity"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "id": "hft-networking-udp-basics",
+  "title": "UDP Basics",
+  "path": "questions/hft/networking/udp-basics.json",
+  "tags": [
+    "hft",
+    "networking",
+    "udp"
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "prompt": "Why is UDP often used for market data fanout?",
+      "options": [
+        {
+          "id": "overhead",
+          "text": "Lower overhead for one-way many-receiver delivery"
+        },
+        {
+          "id": "retry",
+          "text": "It always retries lost packets"
+        },
+        {
+          "id": "order",
+          "text": "It guarantees global ordering"
+        },
+        {
+          "id": "tls",
+          "text": "It always encrypts by default"
+        }
+      ],
+      "correctOptionIds": [
+        "overhead"
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "prompt": "UDP does **not** provide:",
+      "options": [
+        {
+          "id": "delivery",
+          "text": "Reliable delivery / retransmission"
+        },
+        {
+          "id": "datagrams",
+          "text": "Datagram packets"
+        },
+        {
+          "id": "port",
+          "text": "Port multiplexing"
+        },
+        {
+          "id": "checksum",
+          "text": "An optional checksum field"
+        }
+      ],
+      "correctOptionIds": [
+        "delivery"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "mcq_multi",
+      "prompt": "Which are typical UDP market-data concerns?\n\n- Select all that apply",
+      "options": [
+        {
+          "id": "loss",
+          "text": "Packet loss"
+        },
+        {
+          "id": "dup",
+          "text": "Duplicates / reordering depending on network"
+        },
+        {
+          "id": "tcp_handshake",
+          "text": "Per-packet TCP handshake"
+        },
+        {
+          "id": "gap",
+          "text": "Sequence gaps"
+        }
+      ],
+      "correctOptionIds": [
+        "loss",
+        "dup",
+        "gap"
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "fib",
+      "prompt": "A common addressing mode for one-to-many market data is ____cast.",
+      "answers": [
+        "multi",
+        "multicast"
+      ],
+      "caseSensitive": false,
+      "explanation": "Multicast."
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "prompt": "If a UDP sequence number jumps from 100 to 103, a feed handler should suspect:",
+      "options": [
+        {
+          "id": "gap",
+          "text": "A gap / lost packets"
+        },
+        {
+          "id": "idle",
+          "text": "Idle market only"
+        },
+        {
+          "id": "halt",
+          "text": "Mandatory trading halt"
+        },
+        {
+          "id": "split",
+          "text": "Stock split"
+        }
+      ],
+      "correctOptionIds": [
+        "gap"
+      ]
+    }
+  ]
+}

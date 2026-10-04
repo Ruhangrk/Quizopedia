@@ -1,0 +1,154 @@
+{
+  "id": "hft-systems-cpu-cache",
+  "title": "CPU Cache",
+  "path": "questions/hft/systems/cpu-cache.json",
+  "tags": [
+    "hft",
+    "systems",
+    "cpu"
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "prompt": "A cache line ping-pong between cores usually comes from:",
+      "options": [
+        {
+          "id": "false_share",
+          "text": "False sharing / contended shared cache lines"
+        },
+        {
+          "id": "dns",
+          "text": "DNS lookups"
+        },
+        {
+          "id": "ssd",
+          "text": "SSD wear leveling"
+        },
+        {
+          "id": "gui",
+          "text": "GUI rendering"
+        }
+      ],
+      "correctOptionIds": [
+        "false_share"
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "prompt": "Keeping hot data in L1/L2 primarily reduces:",
+      "options": [
+        {
+          "id": "mem_lat",
+          "text": "Memory access latency"
+        },
+        {
+          "id": "tick",
+          "text": "Exchange tick size"
+        },
+        {
+          "id": "fee",
+          "text": "Exchange fees"
+        },
+        {
+          "id": "lot",
+          "text": "Lot size"
+        }
+      ],
+      "correctOptionIds": [
+        "mem_lat"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "mcq_multi",
+      "prompt": "Which practices help cache locality on a hot path?\n\n- Select all that apply",
+      "options": [
+        {
+          "id": "compact",
+          "text": "Compact data structures"
+        },
+        {
+          "id": "prefetch",
+          "text": "Careful prefetching where appropriate"
+        },
+        {
+          "id": "scatter",
+          "text": "Scattering fields across many heap objects"
+        },
+        {
+          "id": "aos",
+          "text": "Avoiding pointer chasing"
+        }
+      ],
+      "correctOptionIds": [
+        "compact",
+        "prefetch",
+        "aos"
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "fib",
+      "prompt": "A typical x86 cache line size is ____ bytes.",
+      "answers": [
+        "64"
+      ],
+      "caseSensitive": false,
+      "explanation": "Usually 64 bytes."
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "prompt": "Branch misprediction hurts HFT code because it:",
+      "options": [
+        {
+          "id": "pipeline",
+          "text": "Disrupts the CPU pipeline / adds bubbles"
+        },
+        {
+          "id": "mtu",
+          "text": "Changes MTU"
+        },
+        {
+          "id": "symbol",
+          "text": "Renames symbols"
+        },
+        {
+          "id": "pst",
+          "text": "Forces post-trade only mode"
+        }
+      ],
+      "correctOptionIds": [
+        "pipeline"
+      ]
+    },
+    {
+      "id": "q6",
+      "type": "mcq",
+      "prompt": "Pinning a thread to a core mainly helps by:",
+      "options": [
+        {
+          "id": "locality",
+          "text": "Improving cache locality and reducing migrations"
+        },
+        {
+          "id": "ram",
+          "text": "Doubling RAM"
+        },
+        {
+          "id": "disk",
+          "text": "Speeding disk sync"
+        },
+        {
+          "id": "dns",
+          "text": "Caching DNS forever"
+        }
+      ],
+      "correctOptionIds": [
+        "locality"
+      ]
+    }
+  ]
+}

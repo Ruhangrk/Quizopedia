@@ -124,10 +124,3 @@ export function downloadAttemptsJson(attempts: Attempt[]): void {
   a.click();
   URL.revokeObjectURL(url);
 }
-
-export async function parseImportedAttempts(file: File): Promise<Attempt[]> {
-  const text = await file.text();
-  const parsed = JSON.parse(text) as unknown;
-  if (!Array.isArray(parsed)) throw new Error("Import must be a JSON array of attempts.");
-  return parsed as Attempt[];
-}

@@ -22,7 +22,7 @@ export function ResultsPage({ attempt, saveNote, onRetest, onHome, onHistory }: 
   return (
     <div className="panel">
       <p className="eyebrow">Results</p>
-      <h2 style={{ fontFamily: "var(--font-display)", fontSize: "2.2rem", margin: "0 0 0.5rem" }}>
+      <h2 className={styles.resultsTitle}>
         {attempt.totals.percent}% · {attempt.totals.correct}/{attempt.totals.total}
       </h2>
       <p className="muted">
@@ -98,7 +98,7 @@ export function ResultsPage({ attempt, saveNote, onRetest, onHome, onHistory }: 
 
       {tab === "analysis" && (
         <div className={styles.analysisGrid}>
-          <section>
+          <section className={styles.analysisSection}>
             <h3>By source</h3>
             {attempt.breakdown.bySource.map((row) => (
               <div key={row.path} className={styles.analysisRow}>
@@ -109,7 +109,7 @@ export function ResultsPage({ attempt, saveNote, onRetest, onHome, onHistory }: 
               </div>
             ))}
           </section>
-          <section>
+          <section className={styles.analysisSection}>
             <h3>By type</h3>
             {Object.entries(attempt.breakdown.byType).map(([type, row]) => (
               <div key={type} className={styles.analysisRow}>
@@ -120,7 +120,7 @@ export function ResultsPage({ attempt, saveNote, onRetest, onHome, onHistory }: 
               </div>
             ))}
           </section>
-          <section>
+          <section className={styles.analysisSection}>
             <h3>By tag</h3>
             {attempt.breakdown.byTag.length === 0 && <p className="muted">No tags.</p>}
             {attempt.breakdown.byTag.map((row) => (
@@ -132,7 +132,7 @@ export function ResultsPage({ attempt, saveNote, onRetest, onHome, onHistory }: 
               </div>
             ))}
           </section>
-          <section>
+          <section className={styles.analysisSection}>
             <h3>Slowest questions</h3>
             {attempt.breakdown.slowest.map((row) => (
               <div key={row.questionId} className={styles.analysisRow}>

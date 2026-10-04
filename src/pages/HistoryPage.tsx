@@ -10,8 +10,6 @@ type Props = {
   onBack: () => void;
   onConnect: () => void;
   onRetest: (attempt: Attempt) => void;
-  onExport: () => void;
-  onImport: (file: File) => void;
 };
 
 export function HistoryPage({
@@ -20,10 +18,8 @@ export function HistoryPage({
   onBack,
   onConnect,
   onRetest,
-  onExport,
-  onImport,
 }: Props) {
-  const [openId, setOpenId] = useState<string | null>(attempts[0]?.id ?? null);
+  const [openId, setOpenId] = useState<string | null>(null);
 
   return (
     <div className="panel">
@@ -32,29 +28,13 @@ export function HistoryPage({
         Older attempts stay. Retest uses the stored <code>path</code> list from that attempt.
       </p>
 
-      <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", marginBottom: "1.25rem" }}>
+      <div className={styles.historyToolbar}>
         <span className={`status-pill ${status.connected ? "ok" : "warn"}`}>
-          {status.connected ? "Disk folder connected" : "Using browser cache / export"}
+          {status.connected ? "Disk folder connected" : "Browser cache only — connect history folder"}
         </span>
         <button type="button" className="btn" onClick={onConnect}>
           {status.connected ? "Reconnect folder" : "Connect history folder"}
         </button>
-        <button type="button" className="btn" onClick={onExport} disabled={attempts.length === 0}>
-          Export JSON
-        </button>
-        <label className="btn" style={{ cursor: "pointer" }}>
-          Import JSON
-          <input
-            type="file"
-            accept="application/json,.json"
-            hidden
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (file) onImport(file);
-              e.currentTarget.value = "";
-            }}
-          />
-        </label>
       </div>
 
       {attempts.length === 0 && <p className="muted">No attempts yet.</p>}
@@ -67,45 +47,46 @@ export function HistoryPage({
               <button
                 type="button"
                 className={styles.historyTop}
-                style={{ width: "100%", background: "transparent", border: 0, padding: 0 }}
                 onClick={() => setOpenId(open ? null : attempt.id)}
               >
-                <div>
-                  <strong>
-                    {attempt.totals.correct}/{attempt.totals.total} ({attempt.totals.percent}%)
-                  </strong>
-                  <div className={styles.muted}>
-                    {new Date(attempt.finishedAt).toLocaleString()} · {attempt.mode}
-                  </div>
-                  <div className={styles.muted}>{attempt.sourceTitles.join(" · ")}</div>
-                </div>
-                <div style={{ textAlign: "right" }}>
-                  <div>{formatDuration(attempt.durationMs)}</div>
-                  <div className={styles.muted}>{open ? "Hide" : "Details"}</div>
-                </div>
+                <strong className={styles.scoreLine}>
+                  {attempt.totals.correct}/{attempt.totals.total} ({attempt.totals.percent}%)
+                </strong>
+                <span className={styles.historyMeta}>
+                  {new Date(attempt.finishedAt).toLocaleString()} · {attempt.mode}
+                </span>
+                <span className={`${styles.historyMeta} ${styles.historyTitles}`}>
+                  {attempt.sourceTitles.join(" · ")}
+                </span>
+                <span className={styles.historyDuration}>{formatDuration(attempt.durationMs)}</span>
+                <span className={styles.historyToggle}>{open ? "Hide" : "Details"}</span>
               </button>
 
               {open && (
                 <div className={styles.detail}>
-                  <div className={styles.muted} style={{ marginBottom: "0.5rem" }}>
-                    Sources
+                  <div className={styles.detailLabel}>
+                    Sources ({attempt.sources.length})
                   </div>
-                  {attempt.sources.map((s) => (
-                    <div key={s} className={styles.analysisRow}>
-                      <span>{s}</span>
-                    </div>
-                  ))}
-                  <div className={styles.muted} style={{ margin: "0.75rem 0 0.35rem" }}>
-                    Per-question times
+                  <div className={styles.detailScroll} style={{ maxHeight: "var(--scroll-max-sm)" }}>
+                    {attempt.sources.map((s) => (
+                      <div key={s} className={styles.analysisRow}>
+                        <span>{s}</span>
+                      </div>
+                    ))}
                   </div>
-                  {attempt.items.map((item) => (
-                    <div key={item.questionId} className={styles.analysisRow}>
-                      <span>
-                        {item.isCorrect ? "✓" : "✗"} {item.questionId}
-                      </span>
-                      <strong>{formatMsPrecise(item.durationMs)}</strong>
-                    </div>
-                  ))}
+                  <div className={styles.detailLabel}>
+                    Per-question times ({attempt.items.length})
+                  </div>
+                  <div className={styles.detailScroll}>
+                    {attempt.items.map((item) => (
+                      <div key={item.questionId} className={styles.analysisRow}>
+                        <span>
+                          {item.isCorrect ? "✓" : "✗"} {item.questionId}
+                        </span>
+                        <strong>{formatMsPrecise(item.durationMs)}</strong>
+                      </div>
+                    ))}
+                  </div>
                   <div className={styles.toolbar}>
                     <button type="button" className="btn btn-primary" onClick={() => onRetest(attempt)}>
                       Retest this set
